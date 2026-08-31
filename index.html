@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Note — دفاتر و استيكرات بإحساس مختلف</title>
+<title>𝒩𝑒𝓇𝑜𝓋𝒶 ♡ — دفاتر و استيكرات بإحساس مختلف</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -611,7 +611,7 @@
     box-shadow:var(--shadow);
   }
   .torn::before{
-    content:"My Note";
+    content:"𝒩𝑒𝓇𝑜𝓋𝒶 ♡";
     position:absolute;
     top:-16px; right:30px;
     background:var(--coral);
@@ -1120,6 +1120,7 @@
 <base target="_blank">
 <base target="_blank">
 <base target="_blank">
+<base target="_blank">
 </head>
 <body class="intro-active">
 
@@ -1163,7 +1164,7 @@
       <line x1="14" y1="44" x2="38" y2="44" stroke="var(--paper)" stroke-width="2.5" stroke-linecap="round"/>
     </svg>
   </div>
-  <div class="intro-logo">🎀 My Note</div>
+  <div class="intro-logo"><img src="https://i.postimg.cc/rmfgkXBS/Chat-GPT-Image-Aug-31-2026-02-53-05-AM-(2).png" alt="𝒩𝑒𝓇𝑜𝓋𝒶 ♡" style="max-width:220px; height:auto; display:block; margin:0 auto;"></div>
   <div class="intro-tagline" dir="ltr">Every Great Story Starts with a Blank Page.</div>
 </div>
 
@@ -1179,7 +1180,7 @@
 </script>
 
 <header>
-  <div class="logo">🎀My Note</div>
+  <div class="logo"><img src="https://i.postimg.cc/rmfgkXBS/Chat-GPT-Image-Aug-31-2026-02-53-05-AM-(2).png" alt="𝒩𝑒𝓇𝑜𝓋𝒶 ♡" style="height:40px; width:auto; display:block;"></div>
   <nav>
     <ul>
       <li><a href="#products">المنتجات</a></li>
@@ -1193,7 +1194,7 @@
     <div>
       <span class="eyebrow" dir="ltr">✨ Write. Dream. Create.</span>
       <h1 dir="ltr">Where every <span class="scribble">idea</span><br>finds a beautiful place 🌸</h1>
-      <p class="lead" dir="ltr">Welcome to My Note, where elegance meets creativity. From beautifully designed notebooks and planners to charming stickers and stationery, every piece is crafted with love to inspire your ideas, organize your days, and make every page unforgettable. 📖💕</p>
+      <p class="lead" dir="ltr">Welcome to 𝒩𝑒𝓇𝑜𝓋𝒶 ♡, where elegance meets creativity. From beautifully designed notebooks and planners to charming stickers and stationery, every piece is crafted with love to inspire your ideas, organize your days, and make every page unforgettable. 📖💕</p>
       <div class="hero-actions">
         <a href="#products" class="btn btn-primary">Explore Collection ✨</a>
       </div>
@@ -1226,11 +1227,10 @@
       <p>نظّم يومك، رتّب أولوياتك، وتابع أهدافك اليومية لتنجز أكثر بكل سهولة. ✅</p>
       <div class="click-hint">اضغط على 📅 للتصفح →</div>
     </div>
-    <div class="pcard c4" onclick="openStickyShop()">
-      <div class="icon" onclick="event.stopPropagation(); openStickyShop()">📝</div>
+    <div class="pcard c4">
+      <div class="icon">📝</div>
       <h3>Sticky Notes</h3>
       <p>اكتب تذكيراتك، مواعيدك، أو رسائلك اللطيفة والصقها في أي مكان لتبقى كل مهامك أمام عينيك. 💕</p>
-      <div class="click-hint">اضغط على 📝 للتصفح →</div>
     </div>
   </div>
 </section>
@@ -1468,7 +1468,7 @@
     cart.forEach(function(item) {
       var itemTotal = item.price * item.qty;
       grandTotal += itemTotal;
-      var typeLabel = item.type === "sticker" ? "استيكر" : item.type === "planner" ? "بلانر" : item.type === "sticky" ? "ستيكي نوت" : "دفتر";
+      var typeLabel = item.type === "sticker" ? "استيكر" : item.type === "planner" ? "بلانر" : "دفتر";
       msg += "\n• " + typeLabel + ": " + item.name + "\n  الكمية: " + item.qty + " | السعر: " + itemTotal + " EGP";
 
     });
@@ -1716,104 +1716,11 @@
   }
 </script>
 
-<!-- STICKY NOTES SHOP -->
-<div id="sticky-shop" class="sticker-shop">
-  <div class="section-head">
-    <div>
-      <span class="tag accent">📝 Sticky Notes Collection</span>
-      <h2>اختار الستيكي نوت المفضل ليك</h2>
-      <p>ستيكي نوت أنيقة لتذكيراتك ورسائلك اللطيفة</p>
-    </div>
-    <button class="back-btn" onclick="closeStickyShop()">← رجوع للمنتجات</button>
-  </div>
-  <div class="sticker-grid" id="sticky-grid"></div>
-</div>
-
-<script>
-  var stickyNotes = [
-    {
-      name: "Sticky Notes 50 Page 📝",
-      desc: "ستيكي نوت 50 ورقة بغلاف هارد كافر كيوت وعملي، مثالية لتدوين ملاحظاتك وتذكيراتك اليومية",
-      price: "50 EGP",
-      img: "https://i.postimg.cc/nhj0JQxn/Chat-GPT-Image-17-aghsts-2026-12-18-38-m.png",
-      badge: "New"
-    }
-  ];
-
-  function renderStickyNotes() {
-    var grid = document.getElementById("sticky-grid");
-    grid.innerHTML = "";
-
-    stickyNotes.forEach(function(s) {
-      var badgeClass = "";
-      if (s.badge === "New") badgeClass = "new";
-      if (s.badge === "Hot") badgeClass = "hot";
-
-      var badge = s.badge
-        ? `<div class="sticker-badge ${badgeClass}">${s.badge}</div>`
-        : "";
-
-      var card = `
-        <div class="sticker-card">
-          <div class="sticker-img-wrap" onclick="openLightbox('${s.img}')">
-            <img class="sticker-img" src="${s.img}" alt="${s.name}" loading="lazy">
-            ${badge}
-          </div>
-
-          <div class="sticker-info">
-            <h3>${s.name}</h3>
-            <p>${s.desc}</p>
-
-            <div class="sticker-bottom">
-              <div class="sticker-price">
-                ${s.price}
-              </div>
-
-              <button class="add-btn" onclick="orderStickyNote('${s.name}')">
-                أضف للسلة ✨
-              </button>
-            </div>
-          </div>
-        </div>
-      `;
-
-      grid.innerHTML += card;
-    });
-  }
-
-  function openStickyShop() {
-    document.getElementById("sticky-shop").classList.add("active");
-    document.getElementById("products").style.display = "none";
-    document.getElementById("sticker-shop").classList.remove("active");
-    document.getElementById("planner-shop").classList.remove("active");
-    document.getElementById("notebook-shop").classList.remove("active");
-    window.scrollTo({
-      top: document.getElementById("sticky-shop").offsetTop - 80,
-      behavior: "smooth"
-    });
-    renderStickyNotes();
-  }
-
-  function closeStickyShop() {
-    document.getElementById("sticky-shop").classList.remove("active");
-    document.getElementById("products").style.display = "block";
-    window.scrollTo({
-      top: document.getElementById("products").offsetTop - 80,
-      behavior: "smooth"
-    });
-  }
-
-  function orderStickyNote(name) {
-    var n = stickyNotes.find(function(x){ return x.name === name; });
-    if (n) addToCart(n.name, n.price, n.img, "sticky");
-  }
-</script>
-
 <section id="connect" class="connect-section">
   <div class="connect-card">
     <span class="connect-mark">🤍</span>
     <h2 dir="ltr">Let's Stay Connected</h2>
-    <p dir="ltr">Thank you for visiting My Note. We can't wait to be part of your next idea, plan, or story. If you have any questions, feel free to reach out—we're always happy to help.</p>
+    <p dir="ltr">Thank you for visiting 𝒩𝑒𝓇𝑜𝓋𝒶 ♡. We can't wait to be part of your next idea, plan, or story. If you have any questions, feel free to reach out—we're always happy to help.</p>
     <div class="connect-links">
       <a href="https://wa.me/201210933566" class="connect-link wa">
         <span class="connect-icon">
@@ -1837,7 +1744,7 @@
             <path fill="currentColor" d="M22 12.06C22 6.505 17.523 2 12 2S2 6.505 2 12.06c0 5.02 3.657 9.184 8.438 9.94v-7.03H7.898v-2.91h2.54V9.845c0-2.522 1.492-3.916 3.777-3.916 1.094 0 2.238.196 2.238.196v2.475h-1.26c-1.243 0-1.63.775-1.63 1.57v1.89h2.773l-.443 2.91h-2.33V22c4.78-.756 8.437-4.92 8.437-9.94Z"/>
           </svg>
         </span>
-        <span dir="ltr">Facebook: My Note</span>
+        <span dir="ltr">Facebook: 𝒩𝑒𝓇𝑜𝓋𝒶 ♡</span>
       </a>
       <a href="https://www.instagram.com/shop.mynote?igsh=MXUzOTIwNHY0bTNmOQ==" class="connect-link ig">
         <span class="connect-icon">
@@ -1852,8 +1759,8 @@
 </section>
 
 <footer class="footer-slim">
-  <div class="flogo">🎀My Note</div>
-  <div>© 2026 My Note. كل الحقوق محفوظة.</div>
+  <div class="flogo">🎀𝒩𝑒𝓇𝑜𝓋𝒶 ♡</div>
+  <div>© 2026 𝒩𝑒𝓇𝑜𝓋𝒶 ♡. كل الحقوق محفوظة.</div>
 </footer>
 
 
