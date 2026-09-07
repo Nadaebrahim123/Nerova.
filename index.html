@@ -3,1826 +3,1129 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>𝒩𝑒𝓇𝑜𝓋𝒶 ♡ — دفاتر و استيكرات بإحساس مختلف</title>
+<title>𝒩𝑒𝓇𝑜𝓋𝒶 ♡ — Premium Stationery</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Kalam:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Great+Vibes&family=Kalam:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- ===== FIREBASE SDK ===== -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
 <style>
+  *{margin:0;padding:0;box-sizing:border-box;}
   :root{
-    --paper:#BCE3F5;
-    --paper-2:#9AD3EC;
-    --pink-bow:#F7A8C4;
-    --pink-bow-dark:#E8789F;
-    --ink:#2B2B33;
-    --coral:#E87FA8;
-    --coral-dark:#D15A87;
-    --sage:#7C8F5E;
-    --yellow:#F0BD3E;
-    --blue-note:#7FA6B0;
-    --line:rgba(43,43,51,0.16);
-    --shadow: 0 10px 25px rgba(43,43,51,0.12);
+    --primary:#E87FA8;
+    --primary-dark:#D15A87;
+    --primary-light:#F7C5D9;
+    --secondary:#7FA6B0;
+    --accent:#F0BD3E;
+    --dark:#2B2B33;
+    --light:#F8F4F0;
+    --white:#FFFFFF;
+    --shadow:0 15px 40px rgba(43,43,51,0.08);
+    --shadow-hover:0 25px 50px rgba(43,43,51,0.15);
+    --radius:20px;
+    --transition:all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --bg-start:#BCE3F5;
+    --bg-end:#D4ECF7;
   }
-  *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
-
-  /* ===== Intro Splash ===== */
-  #intro-screen{
-    position:fixed; inset:0; z-index:9999;
-    background:linear-gradient(160deg, var(--paper) 0%, var(--paper-2) 100%);
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    overflow:hidden;
-    transition:opacity 1s ease, visibility 1s ease;
-  }
-  #intro-screen.intro-hide{
-    opacity:0; visibility:hidden; pointer-events:none;
-  }
-  body.intro-active{overflow:hidden; height:100vh;}
-
-  .intro-logo{
-    font-family:'Great Vibes', cursive;
-    font-weight:400;
-    font-size:4.2rem;
-    color:var(--pink-bow-dark);
-    opacity:0;
-    letter-spacing:2px;
-    animation:introFade 1.1s ease forwards;
-    animation-delay:.3s;
-    text-shadow: 2px 2px 8px rgba(232,127,168,0.2);
-  }
-  .intro-logo .heart{
-    color:var(--coral);
-    display:inline-block;
-    animation:heartBeat 1.8s ease-in-out infinite;
-  }
-  @keyframes heartBeat{
-    0%,100%{transform:scale(1);}
-    50%{transform:scale(1.15);}
-  }
-  .intro-tagline{
-    margin-top:16px;
-    font-family:'Cairo', sans-serif;
-    font-weight:600;
-    font-size:1.05rem;
-    color:var(--ink);
-    opacity:0;
-    text-align:center;
-    letter-spacing:.3px;
-    animation:introFade 1.1s ease forwards;
-    animation-delay:1.5s;
-  }
-  .intro-desc{
-    margin-top:14px;
-    max-width:520px;
-    padding:0 24px;
-    font-family:'Cairo', sans-serif;
-    font-weight:400;
-    font-size:.95rem;
-    line-height:1.85;
-    color:var(--ink);
-    opacity:0;
-    text-align:center;
-    animation:introFade 1.1s ease forwards;
-    animation-delay:2.2s;
-  }
-  .intro-btn{
-    margin-top:22px;
-    display:inline-block;
-    background:var(--coral);
-    color:#fff;
-    font-family:'Cairo', sans-serif;
-    font-weight:700;
-    font-size:.95rem;
-    padding:12px 30px;
-    border-radius:30px;
-    box-shadow:var(--shadow);
-    opacity:0;
-    animation:introFade 1.1s ease forwards;
-    animation-delay:2.9s;
-    transition:transform .25s ease;
-  }
-  .intro-btn:hover{transform:translateY(-3px);}
-  @keyframes introFade{
-    from{opacity:0; transform:translateY(10px);}
-    to{opacity:1; transform:translateY(0);}
-  }
-
-  .intro-doodles{position:absolute; inset:0; pointer-events:none;}
-  .intro-doodles svg{
-    position:absolute;
-    opacity:0;
-    animation:introDoodle 2.6s ease forwards, introFloat 6s ease-in-out infinite 2.6s;
-  }
-  @keyframes introDoodle{
-    0%{opacity:0; transform:translateY(14px) rotate(0deg);}
-    25%{opacity:1;}
-    100%{opacity:.6; transform:translateY(0) rotate(var(--r,0deg));}
-  }
-  @keyframes introFloat{
-    0%,100%{ transform:translateY(0) rotate(var(--r,0deg)); }
-    50%{ transform:translateY(-10px) rotate(calc(var(--r,0deg) + 3deg)); }
-  }
-  @media (prefers-reduced-motion: reduce){
-    .intro-doodles svg{animation:none!important; opacity:.6!important; transform:none!important;}
-  }
-
   body{
-    margin:0;
-    background:var(--paper);
-    color:var(--ink);
-    font-family:'Cairo', sans-serif;
+    font-family:'Cairo',sans-serif;
+    background:linear-gradient(160deg, var(--bg-start), var(--bg-end));
+    color:var(--dark);
     overflow-x:hidden;
+    min-height:100vh;
   }
-  .accent{
-    font-family:'Kalam', cursive;
-  }
-  a{color:inherit;text-decoration:none;}
+  ::-webkit-scrollbar{width:10px;}
+  ::-webkit-scrollbar-track{background:transparent;}
+  ::-webkit-scrollbar-thumb{background:var(--primary);border-radius:10px;}
+  ::-webkit-scrollbar-thumb:hover{background:var(--primary-dark);}
+  a{text-decoration:none;color:inherit;}
+  img{max-width:100%;display:block;}
 
-  /* subtle paper grain */
-  body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    background-image:
-      radial-gradient(circle at 1px 1px, rgba(43,43,51,0.045) 1px, transparent 0);
-    background-size: 14px 14px;
-    pointer-events:none;
-    z-index:0;
-  }
-
-  header{
+  /* ===== NAVBAR ===== */
+  .navbar{
     position:sticky;
     top:0;
-    z-index:50;
+    z-index:99;
+    padding:15px 6%;
+    background:rgba(255,255,255,0.7);
+    backdrop-filter:blur(20px);
+    border-bottom:1px solid rgba(43,43,51,0.06);
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:18px 6%;
-    background:rgba(188,227,245,0.88);
-    backdrop-filter:blur(6px);
-    border-bottom:1px dashed var(--line);
+    transition:var(--transition);
   }
-  .logo{
+  .navbar.scrolled{
+    box-shadow:var(--shadow);
+    background:rgba(255,255,255,0.85);
+  }
+  .nav-logo{
+    font-family:'Great Vibes',cursive;
+    font-size:2rem;
+    color:var(--primary-dark);
+    letter-spacing:1px;
+  }
+  .nav-logo .heart{color:var(--primary);display:inline-block;animation:heartBeat 2s ease-in-out infinite;}
+  @keyframes heartBeat{
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.2);}
+  }
+  .nav-links{
     display:flex;
     align-items:center;
-    gap:10px;
-    font-weight:800;
-    font-size:1.4rem;
-    letter-spacing:.5px;
-  }
-  .logo span{
-    background:var(--coral);
-    color:var(--paper);
-    width:34px;height:34px;
-    border-radius:6px;
-    display:flex;align-items:center;justify-content:center;
-    font-family:'Kalam',cursive;
-    transform:rotate(-6deg);
-    box-shadow:var(--shadow);
-  }
-  .bow{
-    display:inline-block;
-    width:30px;height:20px;
-    position:relative;
-    flex:none;
-  }
-  .bow::before,
-  .bow::after{
-    content:"";
-    position:absolute;
-    top:0;
-    width:14px;height:20px;
-    background:var(--pink-bow);
-    border:2px solid var(--pink-bow-dark);
-  }
-  .bow::before{
-    right:13px;
-    border-radius:14px 2px 2px 14px;
-    clip-path:polygon(100% 0, 0 50%, 100% 100%);
-  }
-  .bow::after{
-    left:13px;
-    border-radius:2px 14px 14px 2px;
-    clip-path:polygon(0 0, 100% 50%, 0 100%);
-  }
-  .bow .bow-knot{
-    position:absolute;
-    top:50%;left:50%;
-    transform:translate(-50%,-50%);
-    width:10px;height:10px;
-    background:var(--pink-bow-dark);
-    border-radius:3px;
-    z-index:2;
-  }
-  footer .bow{transform:scale(0.85);}
-  nav ul{
-    display:flex;
-    gap:28px;
+    gap:30px;
     list-style:none;
-    margin:0;padding:0;
     font-weight:600;
-    font-size:.95rem;
+    font-size:0.95rem;
   }
-  nav a{position:relative; padding:4px 0;}
-  nav a::after{
-    content:"";
+  .nav-links a{
+    position:relative;
+    padding:4px 0;
+    transition:var(--transition);
+  }
+  .nav-links a::after{
+    content:'';
     position:absolute;
-    right:0;left:0;bottom:-4px;
+    bottom:-4px;
+    right:0;
+    width:0;
     height:2px;
-    background:var(--coral);
-    transform:scaleX(0);
-    transition:transform .25s ease;
+    background:var(--primary);
+    transition:var(--transition);
   }
-  nav a:hover::after{transform:scaleX(1);}
+  .nav-links a:hover::after{width:100%;}
   .nav-cta{
-    background:var(--ink);
-    color:var(--paper)!important;
-    padding:8px 18px;
+    background:var(--primary);
+    color:var(--white)!important;
+    padding:10px 24px;
     border-radius:30px;
     font-weight:700;
+    transition:var(--transition);
   }
+  .nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(232,127,168,0.35);}
+  .nav-cta::after{display:none!important;}
+  .hamburger{display:none;font-size:1.5rem;cursor:pointer;}
 
-  /* HERO */
+  /* ===== HERO ===== */
   .hero{
-    transition:opacity 1s ease .1s, transform 1s ease .1s;
-    position:relative;
     min-height:92vh;
     display:flex;
     align-items:center;
     padding:0 6%;
+    position:relative;
     overflow:hidden;
   }
-  body.intro-active .hero{
-    opacity:0;
-    transform:translateY(18px);
+  .hero::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.2'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   }
-  .hero-grid{
-    display:grid;
-    grid-template-columns:1fr;
-    gap:40px;
-    align-items:center;
-    justify-items:start;
-    text-align:left;
-    width:100%;
-    z-index:2;
-  }
-  .eyebrow{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    font-size:.85rem;
-    font-weight:700;
-    color:var(--coral-dark);
-    background:rgba(232,127,168,0.12);
-    padding:6px 14px;
-    border-radius:30px;
-    margin-bottom:18px;
-    animation:eyebrowPulse 2.4s ease-in-out infinite;
-  }
-  @keyframes eyebrowPulse{
-    0%,100%{ box-shadow:0 0 0 0 rgba(232,127,168,0.35); }
-    50%{ box-shadow:0 0 0 8px rgba(232,127,168,0); }
-  }
-  @media (prefers-reduced-motion: reduce){
-    .eyebrow{animation:none!important;}
-  }
-  .eyebrow::before{content:"●"; font-size:.6rem;}
-  h1{
-    font-size:2.6rem;
-    line-height:1.15;
-    font-weight:800;
-    margin:0 0 18px;
-    white-space:nowrap;
-  }
-  h1 .scribble{
-    font-family:'Kalam',cursive;
-    color:var(--coral-dark);
-    font-weight:700;
+  .hero-content{
     position:relative;
-    display:inline-block;
+    z-index:2;
+    max-width:650px;
   }
-  .hero p.lead{
-    font-size:1.15rem;
-    line-height:1.9;
-    color:rgba(43,43,51,0.78);
-    max-width:560px;
-    margin:0 0 30px;
-  }
-  .hero-actions{display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-start;}
-  .btn{
+  .hero-badge{
     display:inline-flex;
     align-items:center;
-    gap:8px;
-    padding:14px 28px;
-    border-radius:10px;
+    gap:10px;
+    background:rgba(255,255,255,0.4);
+    backdrop-filter:blur(10px);
+    padding:8px 20px;
+    border-radius:30px;
+    font-weight:700;
+    font-size:0.85rem;
+    color:var(--dark);
+    margin-bottom:20px;
+    border:1px solid rgba(255,255,255,0.3);
+  }
+  .hero-badge .dot{
+    width:8px;height:8px;
+    border-radius:50%;
+    background:var(--accent);
+    animation:pulseDot 2s ease-in-out infinite;
+  }
+  @keyframes pulseDot{
+    0%,100%{opacity:1;transform:scale(1);}
+    50%{opacity:0.5;transform:scale(0.8);}
+  }
+  .hero-title{
+    font-family:'Playfair Display',serif;
+    font-size:4rem;
+    line-height:1.1;
+    font-weight:700;
+    margin-bottom:15px;
+    color:var(--dark);
+  }
+  .hero-title .highlight{
+    color:var(--primary-dark);
+    font-family:'Great Vibes',cursive;
+    font-size:4.5rem;
+  }
+  .hero-sub{
+    font-size:1.1rem;
+    line-height:1.9;
+    color:rgba(43,43,51,0.7);
+    margin-bottom:30px;
+    max-width:500px;
+  }
+  .hero-btns{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+  }
+  .btn-primary{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:16px 35px;
+    background:var(--primary);
+    color:var(--white);
+    border:none;
+    border-radius:30px;
     font-weight:700;
     font-size:1rem;
     cursor:pointer;
-    border:none;
-    transition:transform .2s ease, box-shadow .2s ease;
+    transition:var(--transition);
+    box-shadow:0 10px 30px rgba(232,127,168,0.25);
   }
-  .btn-primary{
-    background:var(--coral);
-    color:#fff;
+  .btn-primary:hover{
+    transform:translateY(-3px);
+    box-shadow:0 15px 40px rgba(232,127,168,0.35);
+  }
+  .btn-secondary{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:16px 35px;
+    background:rgba(255,255,255,0.5);
+    backdrop-filter:blur(10px);
+    color:var(--dark);
+    border:1px solid rgba(43,43,51,0.08);
+    border-radius:30px;
+    font-weight:700;
+    font-size:1rem;
+    cursor:pointer;
+    transition:var(--transition);
+  }
+  .btn-secondary:hover{
+    background:var(--white);
+    transform:translateY(-3px);
     box-shadow:var(--shadow);
   }
-  .btn-primary:hover{transform:translateY(-3px);}
-  .btn-outline{
-    background:transparent;
-    border:2px solid var(--ink);
-    color:var(--ink);
-  }
-  .btn-outline:hover{background:var(--ink); color:var(--paper);}
-
-  /* sticky note stack illustration */
-  .stack{
-    position:relative;
-    height:480px;
-  }
-  .note{
+  .hero-image{
     position:absolute;
-    width:230px;
-    height:230px;
-    border-radius:3px 3px 60px 3px;
-    box-shadow:0 18px 30px rgba(43,43,51,0.18);
-    padding:24px;
-    font-family:'Kalam',cursive;
-    font-size:1.15rem;
-    line-height:1.5;
-    color:rgba(43,43,51,0.85);
-    transition:transform .4s ease;
+    right:8%;
+    top:50%;
+    transform:translateY(-50%);
+    width:400px;
+    height:400px;
+    background:linear-gradient(135deg, rgba(255,255,255,0.4), rgba(232,127,168,0.15));
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:8rem;
+    box-shadow:0 30px 60px rgba(232,127,168,0.1);
+    animation:floatImage 6s ease-in-out infinite;
+    backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,0.2);
   }
-  .note:hover{transform:translateY(-10px) rotate(0deg) !important;}
-  .note.n1{background:var(--yellow); top:10px; right:30px; transform:rotate(-7deg); z-index:3;}
-  .note.n2{background:var(--coral); color:#fff; top:120px; right:230px; transform:rotate(6deg); z-index:2; width:200px; height:200px;}
-  .note.n3{background:var(--blue-note); top:250px; right:40px; transform:rotate(4deg); z-index:1; width:190px;height:190px;}
-  .note.n4{background:var(--sage); color:#fff; top:-30px; right:200px; transform:rotate(-3deg); z-index:0; width:170px; height:170px;}
-
-  section{padding:110px 6%; position:relative; z-index:1;}
-  .section-head{max-width:640px; margin-bottom:60px; position:relative; z-index:1;}
-  .section-head .tag{
-    font-family:'Kalam',cursive;
-    color:var(--coral-dark);
-    font-size:1.2rem;
-    display:block;
-    margin-bottom:6px;
+  @keyframes floatImage{
+    0%,100%{transform:translateY(-50%) scale(1);}
+    50%{transform:translateY(-55%) scale(1.02);}
   }
-  .section-head h2{font-size:2.4rem; margin:0 0 14px; font-weight:800;}
-  .section-head p{font-size:1.05rem; color:rgba(43,43,51,0.7); line-height:1.8; margin:0;}
+  .hero-image .emoji{filter:drop-shadow(0 10px 30px rgba(0,0,0,0.05));}
 
-  /* PRODUCTS */
-  .products{
+  /* ===== SECTION ===== */
+  section{padding:80px 6%;position:relative;}
+  .section-header{
+    text-align:center;
+    margin-bottom:50px;
+  }
+  .section-header .tag{
+    display:inline-block;
+    font-family:'Kalam',cursive;
+    color:var(--primary-dark);
+    font-size:1.1rem;
+    margin-bottom:5px;
+  }
+  .section-header h2{
+    font-family:'Playfair Display',serif;
+    font-size:2.8rem;
+    font-weight:700;
+    margin-bottom:10px;
+  }
+  .section-header p{
+    color:rgba(43,43,51,0.6);
+    font-size:1.05rem;
+    max-width:550px;
+    margin:0 auto;
+  }
+
+  /* ===== PRODUCTS GRID ===== */
+  .products-grid{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:26px;
-    position:relative;
-    z-index:1;
+    gap:30px;
   }
-  .pcard{
-    background:#fff;
+  .product-card{
+    background:rgba(255,255,255,0.7);
+    backdrop-filter:blur(10px);
+    border-radius:var(--radius);
+    padding:30px 25px;
+    box-shadow:var(--shadow);
+    transition:var(--transition);
+    position:relative;
+    overflow:hidden;
+    cursor:pointer;
+    border:1px solid rgba(255,255,255,0.3);
+  }
+  .product-card:hover{
+    transform:translateY(-10px);
+    box-shadow:var(--shadow-hover);
+    background:rgba(255,255,255,0.9);
+  }
+  .product-card::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    height:4px;
+    background:linear-gradient(90deg, var(--primary), var(--secondary));
+    opacity:0;
+    transition:var(--transition);
+  }
+  .product-card:hover::before{opacity:1;}
+  .product-icon{
+    width:70px;
+    height:70px;
     border-radius:16px;
-    padding:30px 24px;
-    box-shadow:var(--shadow);
-    border:1px solid var(--line);
-    transition:transform .3s ease, box-shadow .3s ease;
-    position:relative;
-    overflow:hidden;
-    cursor:pointer;
-  }
-  .pcard:hover{transform:translateY(-8px); box-shadow:0 20px 35px rgba(43,43,51,0.18);}
-  .pcard .icon{
-    width:58px;height:58px;
-    border-radius:14px;
-    display:flex;align-items:center;justify-content:center;
-    font-size:1.7rem;
-    margin-bottom:20px;
-    cursor:pointer;
-    transition:transform .2s ease;
-  }
-  .pcard .icon:hover{transform:scale(1.1);}
-  .pcard.c1 .icon{background:rgba(232,127,168,0.15); color:var(--coral-dark);}
-  .pcard.c2 .icon{background:rgba(240,189,62,0.2); color:#9c7611;}
-  .pcard.c3 .icon{background:rgba(124,143,94,0.18); color:#54622f;}
-  .pcard.c4 .icon{background:rgba(127,166,176,0.2); color:#3c6873;}
-  .pcard h3{font-size:1.25rem; margin:0 0 10px; font-weight:700;}
-  .pcard p{font-size:.92rem; color:rgba(43,43,51,0.65); line-height:1.7; margin:0 0 18px;}
-  .pcard .price{font-weight:800; font-family:'Kalam',cursive; font-size:1.1rem; color:var(--coral-dark);}
-  .pcard .click-hint{
-    font-size:.85rem;
-    font-weight:700;
-    color:var(--coral-dark);
-    margin-top:8px;
-    display:flex;
-    align-items:center;
-    gap:6px;
-  }
-
-  /* STICKER SHOP - Professional Store Style */
-  .sticker-shop{
-    display:none;
-    padding:110px 6%;
-    position:relative;
-    z-index:1;
-  }
-  .sticker-shop.active{
-    display:block;
-  }
-  .sticker-shop .section-head{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    flex-wrap:wrap;
-    gap:16px;
-    max-width:none;
-  }
-  .back-btn{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    padding:10px 22px;
-    border-radius:30px;
-    border:2px solid var(--ink);
-    background:transparent;
-    color:var(--ink);
-    font-family:'Cairo',sans-serif;
-    font-weight:700;
-    font-size:.95rem;
-    cursor:pointer;
-    transition:all .25s ease;
-  }
-  .back-btn:hover{background:var(--ink); color:var(--paper);}
-  .sticker-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:24px;
-  }
-  .sticker-card{
-    background:#fff;
-    border-radius:18px;
-    overflow:hidden;
-    box-shadow:var(--shadow);
-    border:1px solid var(--line);
-    transition:transform .3s ease, box-shadow .3s ease;
-    position:relative;
-  }
-  .sticker-card:hover{transform:translateY(-6px); box-shadow:0 20px 35px rgba(43,43,51,0.18);}
-  .sticker-img-wrap{
-    width:100%;
-    height:320px;
-    position:relative;
-    overflow:hidden;
-    cursor:zoom-in;
-    background:#f8f8f8;
     display:flex;
     align-items:center;
     justify-content:center;
+    font-size:2.2rem;
+    margin-bottom:18px;
+    transition:var(--transition);
+    background:rgba(255,255,255,0.4);
+    backdrop-filter:blur(5px);
   }
-  .sticker-img{
-    width:100%;
-    height:100%;
-    object-fit:contain;
-    object-position:center;
-    transition:transform .4s ease;
-    padding:16px;
-  }
-  .sticker-card:hover .sticker-img{transform:scale(1.05);}
-  .sticker-img-wrap::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 50%);
-    pointer-events:none;
-  }
-  .sticker-badge{
-    position:absolute;
-    top:14px;
-    right:14px;
-    background:var(--coral);
-    color:#fff;
-    padding:5px 14px;
-    border-radius:20px;
-    font-size:.8rem;
+  .product-card:hover .product-icon{transform:scale(1.1) rotate(-5deg);}
+  .product-card h3{
+    font-size:1.2rem;
     font-weight:700;
-    z-index:2;
-    box-shadow:0 2px 8px rgba(0,0,0,0.15);
+    margin-bottom:8px;
   }
-  .sticker-badge.new{background:var(--sage);}
-  .sticker-badge.hot{background:var(--yellow); color:var(--ink);}
-  .sticker-info{
-    padding:22px;
-  }
-  .sticker-info h3{
-    font-size:1.15rem;
-    margin:0 0 6px;
-    font-weight:700;
-  }
-  .sticker-info p{
-    font-size:.88rem;
+  .product-card p{
+    font-size:0.92rem;
     color:rgba(43,43,51,0.6);
-    margin:0 0 16px;
-    line-height:1.6;
+    line-height:1.7;
+    margin-bottom:15px;
   }
-  .sticker-bottom{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-  }
-  .sticker-price{
-    font-family:'Kalam',cursive;
-    font-size:1.4rem;
+  .product-card .shop-link{
+    color:var(--primary);
     font-weight:700;
-    color:var(--coral-dark);
-  }
-  .sticker-price span{
-    font-size:.85rem;
-    color:rgba(43,43,51,0.5);
-    font-family:'Cairo',sans-serif;
-    font-weight:400;
-  }
-  .add-btn{
-    background:var(--ink);
-    color:#fff;
-    border:none;
-    padding:10px 24px;
-    border-radius:10px;
-    font-weight:700;
-    font-family:'Cairo',sans-serif;
-    font-size:.9rem;
-    cursor:pointer;
-    transition:transform .2s ease, background .2s ease;
     display:inline-flex;
     align-items:center;
     gap:6px;
+    transition:var(--transition);
   }
-  .add-btn:hover{transform:translateY(-2px); background:var(--coral-dark);}
+  .product-card .shop-link:hover{gap:12px;}
 
-  /* Lightbox for image zoom */
-  .lightbox{
-    position:fixed;
-    inset:0;
-    z-index:9998;
-    background:rgba(0,0,0,0.85);
-    display:none;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-  }
-  .lightbox.active{display:flex;}
-  .lightbox img{
-    max-width:90vw;
-    max-height:85vh;
-    border-radius:12px;
-    box-shadow:0 20px 60px rgba(0,0,0,0.4);
-  }
-  .lightbox-close{
-    position:absolute;
-    top:20px;
-    right:20px;
-    width:44px;
-    height:44px;
-    border-radius:50%;
-    background:#fff;
-    color:var(--ink);
-    border:none;
-    font-size:1.5rem;
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
-
-  /* ABOUT / SIGNATURE STRIP */
-  .strip{
-    background:var(--ink);
-    color:var(--paper);
-    padding:90px 6%;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:60px;
-    align-items:center;
+  /* ===== FEATURED SLIDER ===== */
+  .slider-container{
     position:relative;
     overflow:hidden;
+    border-radius:var(--radius);
   }
-  .strip > div{ position:relative; z-index:1; }
-  .strip h2{font-size:2.2rem; margin:0 0 20px; font-weight:800;}
-  .strip p{line-height:1.9; color:rgba(244,239,227,0.78); font-size:1.05rem;}
-  .strip .stats{display:flex; gap:40px; margin-top:30px;}
-  .strip .stat b{display:block; font-size:2.2rem; font-family:'Kalam',cursive; color:var(--yellow);}
-  .strip .stat span{font-size:.85rem; color:rgba(244,239,227,0.6);}
-  .torn{
-    position:relative;
-    background:var(--paper-2);
-    border-radius:10px;
-    padding:36px;
-    color:var(--ink);
-    font-family:'Kalam',cursive;
-    font-size:1.3rem;
-    line-height:1.8;
-    transform:rotate(-2deg);
-    box-shadow:var(--shadow);
-  }
-  .torn::before{
-    content:"𝒩𝑒𝓇𝑜𝓋𝒶 ♡";
-    position:absolute;
-    top:-16px; right:30px;
-    background:var(--coral);
-    color:#fff;
-    padding:6px 16px;
-    border-radius:6px;
-    font-size:.9rem;
-    font-weight:800;
-    font-family:'Cairo',sans-serif;
-  }
-
-  /* NEWSLETTER */
-  .cta-band{
-    text-align:center;
-    background:var(--coral);
-    color:#fff;
-    border-radius:24px;
-    margin:0 6% 100px;
-    padding:70px 30px;
-    position:relative;
-    overflow:hidden;
-  }
-  .cta-band h2{font-size:2.2rem; margin:0 0 14px; font-weight:800; position:relative; z-index:1;}
-  .cta-band p{margin:0 0 30px; opacity:.9; font-size:1.05rem; position:relative; z-index:1;}
-  .cta-form{
+  .slider-track{
     display:flex;
-    justify-content:center;
-    gap:10px;
-    flex-wrap:wrap;
-    position:relative;
-    z-index:1;
+    transition:transform 0.6s ease;
   }
-  .cta-form input{
-    padding:14px 18px;
-    border-radius:10px;
-    border:none;
-    width:280px;
-    font-family:'Cairo',sans-serif;
-    font-size:.95rem;
-  }
-  .cta-form button{
-    background:var(--ink);
-    color:#fff;
-    border:none;
-    padding:14px 26px;
-    border-radius:10px;
-    font-weight:700;
-    cursor:pointer;
-  }
-
-  footer{
-    padding:50px 6% 30px;
-    border-top:1px dashed var(--line);
+  .slider-slide{
+    min-width:100%;
+    padding:60px 50px;
+    background:rgba(255,255,255,0.5);
+    backdrop-filter:blur(10px);
+    border-radius:var(--radius);
     display:flex;
+    align-items:center;
     justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:16px;
-    font-size:.9rem;
-    color:rgba(43,43,51,0.65);
+    gap:40px;
+    border:1px solid rgba(255,255,255,0.3);
   }
-  .connect-section{
-    padding:0 6% 100px;
+  .slider-slide .slide-content{max-width:500px;}
+  .slider-slide h2{
+    font-family:'Playfair Display',serif;
+    font-size:2.5rem;
+    margin-bottom:10px;
   }
-  .connect-card{
-    max-width:640px;
+  .slider-slide p{font-size:1.05rem;opacity:0.8;margin-bottom:20px;}
+  .slider-slide .slide-btn{
+    display:inline-block;
+    padding:12px 30px;
+    background:var(--primary);
+    color:var(--white);
+    border-radius:30px;
+    font-weight:700;
+    transition:var(--transition);
+  }
+  .slider-slide .slide-btn:hover{transform:scale(1.05);box-shadow:0 10px 30px rgba(232,127,168,0.25);}
+  .slider-controls{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin-top:20px;
+  }
+  .slider-controls button{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    border:none;
+    background:rgba(255,255,255,0.7);
+    backdrop-filter:blur(10px);
+    box-shadow:var(--shadow);
+    cursor:pointer;
+    font-size:1.2rem;
+    transition:var(--transition);
+    border:1px solid rgba(255,255,255,0.2);
+  }
+  .slider-controls button:hover{background:var(--primary);color:var(--white);}
+
+  /* ===== REVIEW SECTION ===== */
+  .review-section{
+    padding:60px 6%;
+  }
+  .review-card{
+    max-width:700px;
     margin:0 auto;
+    background:rgba(255,255,255,0.6);
+    backdrop-filter:blur(10px);
+    border-radius:var(--radius);
+    padding:50px 40px;
+    border:1px solid rgba(255,255,255,0.2);
+    box-shadow:var(--shadow);
     text-align:center;
-    background:linear-gradient(160deg, var(--paper-2) 0%, var(--paper) 100%);
-    border:1px solid var(--line);
-    border-radius:28px;
-    padding:64px 40px;
-    box-shadow:var(--shadow);
   }
-  .connect-mark{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    width:56px;height:56px;
-    border-radius:50%;
-    background:#fff;
-    font-size:1.5rem;
-    box-shadow:var(--shadow);
-    margin-bottom:22px;
-  }
-  .connect-card h2{
-    font-size:2rem;
-    font-weight:800;
-    margin:0 0 16px;
-  }
-  .connect-card p{
-    font-size:1.02rem;
-    line-height:1.9;
-    color:rgba(43,43,51,0.72);
-    max-width:480px;
-    margin:0 auto 34px;
-  }
-  .connect-links{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:14px;
-  }
-  .connect-link{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    background:#fff;
-    color:var(--ink);
-    font-weight:700;
-    font-size:.95rem;
-    padding:13px 26px;
-    border-radius:30px;
-    box-shadow:var(--shadow);
-    transition:transform .2s ease, background .2s ease, color .2s ease;
-  }
-  .connect-link:hover{transform:translateY(-3px);}
-  .connect-icon{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    width:26px;height:26px;
-    border-radius:50%;
-    flex:none;
-  }
-  .connect-link.messenger .connect-icon{background:#0084FF; color:#fff;}
-  .connect-link.wa-group .connect-icon{background:#25D366; color:#fff;}
-  .connect-link.fb .connect-icon{background:#1877F2; color:#fff;}
-  .connect-link.ig .connect-icon{background:linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color:#fff;}
-  .connect-link.messenger:hover{background:#0084FF; color:#fff;}
-  .connect-link.wa-group:hover{background:#25D366; color:#fff;}
-  .connect-link.fb:hover{background:#1877F2; color:#fff;}
-  .connect-link.ig:hover{background:linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color:#fff;}
-
-  .footer-slim{
-    padding:26px 6% 36px;
-    border-top:1px dashed var(--line);
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:12px;
-    font-size:.88rem;
-    color:rgba(43,43,51,0.6);
-  }
-  .footer-slim .flogo{font-weight:800; color:var(--ink); font-size:1.05rem;}
-  footer .flogo{font-weight:800; color:var(--ink); font-size:1.1rem;}
-  .socials{display:flex; gap:14px;}
-  .socials a{
-    width:36px;height:36px;
-    border-radius:50%;
-    background:var(--ink);
-    color:var(--paper);
-    display:flex;align-items:center;justify-content:center;
-    font-size:.9rem;
-  }
-
-  @media (max-width: 980px){
-    .hero-grid{grid-template-columns:1fr;}
-    .stack{display:none;}
-    h1{font-size:2.6rem;}
-    .products{grid-template-columns:repeat(2,1fr);}
-    .sticker-grid{grid-template-columns:repeat(2,1fr);}
-    .strip{grid-template-columns:1fr;}
-    nav ul{display:none;}
-  }
-  @media (max-width:560px){
-    .products{grid-template-columns:1fr;}
-    .sticker-grid{grid-template-columns:1fr;}
-    h1{font-size:1.5rem;}
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    *{transition:none!important;}
-  }
-
-  /* ORDER MODAL */
-  .order-modal{
-    position:fixed;
-    inset:0;
-    z-index:9997;
-    background:rgba(0,0,0,0.6);
-    display:none;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-  }
-  .order-modal.active{display:flex;}
-  .order-box{
-    background:#fff;
-    border-radius:20px;
-    padding:32px 28px;
-    max-width:420px;
-    width:100%;
-    box-shadow:0 20px 50px rgba(0,0,0,0.2);
-    text-align:center;
-    animation:modalPop .3s ease;
-  }
-  @keyframes modalPop{
-    from{opacity:0; transform:scale(0.9) translateY(10px);}
-    to{opacity:1; transform:scale(1) translateY(0);}
-  }
-  .order-box h3{
-    margin:0 0 6px;
-    font-size:1.3rem;
-    font-weight:800;
-    color:var(--ink);
-  }
-  .order-box .sub{
-    font-size:.9rem;
-    color:rgba(43,43,51,0.6);
-    margin:0 0 22px;
-  }
-  .order-field{
-    text-align:right;
-    margin-bottom:16px;
-  }
-  .order-field label{
+  .happy-girl{
+    font-size:4rem;
     display:block;
-    font-size:.85rem;
+    margin-bottom:5px;
+    animation:floatHappy 3s ease-in-out infinite;
+  }
+  @keyframes floatHappy{
+    0%,100%{transform:translateY(0) rotate(-3deg);}
+    50%{transform:translateY(-8px) rotate(3deg);}
+  }
+  .review-card h3{
+    font-family:'Playfair Display',serif;
+    font-size:1.8rem;
+    margin-bottom:5px;
+  }
+  .review-card .sub{
+    color:rgba(43,43,51,0.6);
+    font-size:0.95rem;
+    margin-bottom:20px;
+    line-height:1.8;
+  }
+  .encourage-box{
+    background:rgba(232,127,168,0.1);
+    border:2px dashed var(--primary);
+    border-radius:16px;
+    padding:14px 20px;
+    margin-bottom:25px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    font-weight:600;
+    font-size:1rem;
+    color:var(--dark);
+    flex-wrap:wrap;
+  }
+  .star-rating{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    margin-bottom:20px;
+    direction:ltr;
+  }
+  .star-rating .star{
+    font-size:2rem;
+    cursor:pointer;
+    color:#ddd;
+    transition:var(--transition);
+  }
+  .star-rating .star.active{color:var(--accent);}
+  .star-rating .star:hover{transform:scale(1.15);}
+  .form-group{margin-bottom:18px;text-align:right;}
+  .form-group label{
+    display:block;
+    font-weight:600;
+    font-size:0.9rem;
+    margin-bottom:5px;
+    color:var(--dark);
+  }
+  .form-group input,
+  .form-group textarea{
+    width:100%;
+    padding:12px 16px;
+    border:1px solid rgba(43,43,51,0.1);
+    border-radius:12px;
+    font-family:'Cairo',sans-serif;
+    font-size:0.95rem;
+    background:rgba(255,255,255,0.5);
+    backdrop-filter:blur(5px);
+    transition:var(--transition);
+    outline:none;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus{
+    border-color:var(--primary);
+    background:rgba(255,255,255,0.8);
+    box-shadow:0 0 0 4px rgba(232,127,168,0.1);
+  }
+  .form-group textarea{height:100px;resize:vertical;}
+  .submit-review{
+    width:100%;
+    padding:14px;
+    background:var(--primary);
+    color:var(--white);
+    border:none;
+    border-radius:12px;
     font-weight:700;
-    color:var(--ink);
+    font-size:1rem;
+    font-family:'Cairo',sans-serif;
+    cursor:pointer;
+    transition:var(--transition);
+  }
+  .submit-review:hover{
+    background:var(--primary-dark);
+    transform:translateY(-2px);
+    box-shadow:0 10px 30px rgba(232,127,168,0.3);
+  }
+  .reviews-header{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    margin-top:35px;
+    padding-top:25px;
+    border-top:2px dashed rgba(43,43,51,0.08);
+    font-weight:700;
+    font-size:1.1rem;
+  }
+  .reviews-header span:first-child{font-size:1.5rem;}
+  .reviews-display{
+    margin-top:15px;
+    max-height:400px;
+    overflow-y:auto;
+    padding-right:10px;
+    text-align:right;
+  }
+  .reviews-display::-webkit-scrollbar{width:6px;}
+  .reviews-display::-webkit-scrollbar-thumb{background:var(--primary);border-radius:10px;}
+  .review-item{
+    background:rgba(255,255,255,0.5);
+    backdrop-filter:blur(5px);
+    border-radius:16px;
+    padding:18px 20px;
+    margin-bottom:12px;
+    border:1px solid rgba(255,255,255,0.2);
+    animation:fadeIn 0.5s ease;
+  }
+  @keyframes fadeIn{
+    from{opacity:0;transform:translateY(10px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+  .review-item .review-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
     margin-bottom:6px;
   }
-  .order-field input{
-    width:100%;
-    padding:12px 14px;
-    border-radius:10px;
-    border:2px solid var(--line);
-    font-family:'Cairo',sans-serif;
-    font-size:.95rem;
-    outline:none;
-    transition:border-color .2s ease;
-  }
-  .order-field input:focus{border-color:var(--coral);}
-  .order-actions{
-    display:flex;
-    gap:10px;
-    margin-top:8px;
-  }
-  .order-actions button{
-    flex:1;
-    padding:12px;
-    border-radius:10px;
-    border:none;
-    font-family:'Cairo',sans-serif;
+  .review-item .review-name{
     font-weight:700;
-    font-size:.95rem;
-    cursor:pointer;
-    transition:transform .2s ease;
+    font-size:0.95rem;
   }
-  .order-actions .confirm-btn{
-    background:var(--coral);
-    color:#fff;
+  .review-item .review-stars{
+    color:var(--accent);
+    font-size:0.9rem;
+    letter-spacing:2px;
   }
-  .order-actions .cancel-btn{
-    background:var(--line);
-    color:var(--ink);
+  .review-item .review-text{
+    font-size:0.92rem;
+    color:rgba(43,43,51,0.7);
+    line-height:1.7;
   }
-  .order-actions button:hover{transform:translateY(-2px);}
-
-
-  /* CART SYSTEM */
-  .cart-btn{
-    position:fixed;
-    bottom:24px;
-    left:24px;
-    z-index:100;
-    width:56px;
-    height:56px;
-    border-radius:50%;
-    background:var(--coral);
-    color:#fff;
-    border:none;
-    font-size:1.4rem;
-    cursor:pointer;
-    box-shadow:0 6px 20px rgba(232,127,168,0.4);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    transition:transform .2s ease;
+  .review-item .review-date{
+    font-size:0.75rem;
+    color:rgba(43,43,51,0.4);
+    margin-top:4px;
   }
-  .cart-btn:hover{transform:scale(1.08);}
-  .cart-count{
-    position:absolute;
-    top:-4px;
-    right:-4px;
-    background:var(--ink);
-    color:#fff;
-    font-size:.7rem;
-    font-weight:800;
-    width:22px;
-    height:22px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-family:'Cairo',sans-serif;
-  }
-
-  .cart-modal{
-    position:fixed;
-    inset:0;
-    z-index:9996;
-    background:rgba(0,0,0,0.55);
-    display:none;
-    align-items:center;
-    justify-content:center;
+  .loading-reviews{
+    text-align:center;
     padding:20px;
+    color:rgba(43,43,51,0.5);
   }
-  .cart-modal.active{display:flex;}
-  .cart-box{
-    background:#fff;
-    border-radius:20px;
-    padding:28px;
-    max-width:480px;
-    width:100%;
-    max-height:85vh;
-    overflow-y:auto;
-    box-shadow:0 20px 50px rgba(0,0,0,0.2);
-    animation:modalPop .3s ease;
-  }
-  .cart-box h3{
-    margin:0 0 4px;
-    font-size:1.3rem;
-    font-weight:800;
-    color:var(--ink);
-    text-align:center;
-  }
-  .cart-box .sub{
-    text-align:center;
-    font-size:.85rem;
-    color:rgba(43,43,51,0.55);
-    margin:0 0 20px;
-  }
-  .cart-item{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    padding:14px;
-    background:var(--paper);
-    border-radius:14px;
-    margin-bottom:10px;
-    border:1px solid var(--line);
-  }
-  .cart-item img{
-    width:56px;
-    height:56px;
-    object-fit:cover;
-    border-radius:10px;
-    flex:none;
-  }
-  .cart-item-info{flex:1; text-align:right;}
-  .cart-item-info h4{
-    margin:0 0 2px;
-    font-size:.95rem;
-    font-weight:700;
-  }
-  .cart-item-info span{
-    font-size:.8rem;
-    color:var(--coral-dark);
-    font-weight:700;
-  }
-  .cart-qty-control{
-    display:flex;
-    align-items:center;
-    gap:6px;
-  }
-  .cart-qty-control button{
-    width:28px;
-    height:28px;
-    border-radius:6px;
-    border:1px solid var(--line);
-    background:#fff;
-    font-weight:700;
-    cursor:pointer;
-    font-family:'Cairo',sans-serif;
-  }
-  .cart-qty-control span{
-    min-width:20px;
-    text-align:center;
-    font-weight:700;
-    font-size:.9rem;
-  }
-  .cart-remove{
-    background:none;
-    border:none;
-    color:var(--coral-dark);
-    font-size:1.1rem;
-    cursor:pointer;
-    padding:4px;
-  }
-  .cart-total-box{
-    margin-top:16px;
-    padding:16px;
-    background:var(--ink);
-    color:#fff;
-    border-radius:14px;
-    text-align:center;
-  }
-  .cart-total-box .total-label{
-    font-size:.85rem;
-    opacity:.7;
-    margin-bottom:4px;
-  }
-  .cart-total-box .total-price{
-    font-family:'Kalam',cursive;
-    font-size:1.8rem;
-    font-weight:700;
-    color:var(--yellow);
-  }
-  .cart-empty{
+  .no-reviews{
     text-align:center;
     padding:30px;
     color:rgba(43,43,51,0.5);
   }
-  .cart-empty-icon{font-size:2.5rem; margin-bottom:10px;}
-  .cart-actions{
-    display:flex;
-    gap:10px;
-    margin-top:18px;
-  }
-  .cart-actions button{
-    flex:1;
-    padding:12px;
-    border-radius:10px;
-    border:none;
-    font-family:'Cairo',sans-serif;
-    font-weight:700;
-    font-size:.95rem;
-    cursor:pointer;
-    transition:transform .2s ease;
-  }
-  .cart-actions .checkout-btn{
-    background:var(--coral);
-    color:#fff;
-  }
-  .cart-actions .close-btn{
-    background:var(--line);
-    color:var(--ink);
-  }
-  .cart-actions button:hover{transform:translateY(-2px);}
+  .no-reviews .icon{font-size:2rem;display:block;margin-bottom:10px;}
 
-
-  /* SUCCESS MODAL */
-  .success-modal{
-    position:fixed;
-    inset:0;
-    z-index:9999;
-    background:rgba(0,0,0,0.55);
-    display:none;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-  }
-  .success-modal.active{display:flex;}
-  .success-box{
-    background:#fff;
-    border-radius:24px;
-    padding:48px 36px;
-    max-width:420px;
-    width:100%;
+  /* ===== ABOUT BRAND ===== */
+  .about-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
     text-align:center;
-    box-shadow:0 20px 50px rgba(0,0,0,0.2);
-    animation:modalPop .4s ease;
   }
-  .success-box .rose{
-    font-size:4rem;
-    margin-bottom:16px;
-    display:block;
-    animation:roseBounce 1.2s ease infinite;
+  .about-item{
+    background:rgba(255,255,255,0.5);
+    backdrop-filter:blur(10px);
+    border-radius:20px;
+    padding:30px;
+    border:1px solid rgba(255,255,255,0.2);
+    transition:var(--transition);
   }
-  @keyframes roseBounce{
-    0%,100%{transform:scale(1) rotate(-5deg);}
-    50%{transform:scale(1.15) rotate(5deg);}
-  }
-  .success-box h3{
-    margin:0 0 10px;
-    font-size:1.5rem;
-    font-weight:800;
-    color:var(--ink);
-  }
-  .success-box p{
-    margin:0 0 28px;
-    font-size:1rem;
-    color:rgba(43,43,51,0.7);
-    line-height:1.7;
-  }
-  .success-box .done-btn{
-    background:var(--coral);
-    color:#fff;
-    border:none;
-    padding:14px 36px;
-    border-radius:30px;
-    font-family:'Cairo',sans-serif;
-    font-weight:700;
-    font-size:1rem;
-    cursor:pointer;
-    transition:transform .2s ease;
-  }
-  .success-box .done-btn:hover{transform:translateY(-3px);}
+  .about-item:hover{transform:translateY(-5px);background:rgba(255,255,255,0.7);}
+  .about-item .icon{font-size:2.5rem;display:block;margin-bottom:10px;}
+  .about-item h3{margin:10px 0;font-weight:700;}
+  .about-item p{color:rgba(43,43,51,0.6);line-height:1.7;}
 
+  /* ===== CONNECT ===== */
+  .connect-section{padding:60px 6%;}
+  .connect-card{
+    max-width:600px;
+    margin:0 auto;
+    text-align:center;
+    background:rgba(255,255,255,0.6);
+    backdrop-filter:blur(10px);
+    border-radius:var(--radius);
+    padding:50px;
+    box-shadow:var(--shadow);
+    border:1px solid rgba(255,255,255,0.2);
+  }
+  .connect-card h2{
+    font-family:'Playfair Display',serif;
+    font-size:2.2rem;
+    margin-bottom:10px;
+  }
+  .connect-card p{color:rgba(43,43,51,0.6);margin-bottom:25px;}
+  .social-links{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+  }
+  .social-links a{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:12px 25px;
+    border-radius:30px;
+    font-weight:700;
+    font-size:0.9rem;
+    transition:var(--transition);
+    border:1px solid rgba(43,43,51,0.06);
+    background:rgba(255,255,255,0.5);
+    backdrop-filter:blur(5px);
+  }
+  .social-links a:hover{transform:translateY(-3px);}
+  .social-links .messenger{background:#0084FF;color:var(--white);border:none;}
+  .social-links .whatsapp{background:#25D366;color:var(--white);border:none;}
+  .social-links .facebook{background:#1877F2;color:var(--white);border:none;}
+  .social-links .instagram{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:var(--white);border:none;}
+
+  /* ===== FOOTER ===== */
+  .footer{
+    padding:50px 6% 30px;
+    border-top:1px solid rgba(43,43,51,0.06);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:20px;
+    font-size:0.9rem;
+    color:rgba(43,43,51,0.5);
+  }
+  .footer .brand{
+    font-family:'Great Vibes',cursive;
+    font-size:1.8rem;
+    color:var(--primary-dark);
+  }
+
+  /* ===== BACK TO TOP ===== */
+  .back-top{
+    position:fixed;
+    bottom:30px;
+    right:30px;
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    background:var(--primary);
+    color:var(--white);
+    border:none;
+    font-size:1.2rem;
+    cursor:pointer;
+    box-shadow:0 10px 30px rgba(232,127,168,0.25);
+    transition:var(--transition);
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(20px);
+    z-index:50;
+  }
+  .back-top.visible{
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0);
+  }
+  .back-top:hover{transform:translateY(-3px);box-shadow:0 15px 40px rgba(232,127,168,0.35);}
+
+  /* ===== RESPONSIVE ===== */
+  @media(max-width:1024px){
+    .hero-image{width:300px;height:300px;font-size:6rem;right:4%;}
+    .hero-title{font-size:3rem;}
+    .products-grid{grid-template-columns:repeat(2,1fr);}
+    .about-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media(max-width:768px){
+    .hamburger{display:block;}
+    .nav-links{
+      display:none;
+      position:absolute;
+      top:100%;
+      left:0;
+      right:0;
+      background:rgba(255,255,255,0.95);
+      backdrop-filter:blur(20px);
+      flex-direction:column;
+      padding:20px;
+      box-shadow:var(--shadow);
+      gap:15px;
+    }
+    .nav-links.open{display:flex;}
+    .hero{flex-direction:column;text-align:center;padding-top:40px;}
+    .hero-content{max-width:100%;}
+    .hero-title{font-size:2.5rem;}
+    .hero-title .highlight{font-size:3rem;}
+    .hero-image{position:relative;right:auto;top:auto;transform:none;width:200px;height:200px;font-size:4rem;margin-top:30px;animation:none;}
+    .hero-btns{justify-content:center;}
+    .products-grid{grid-template-columns:1fr;}
+    .about-grid{grid-template-columns:1fr;}
+    .review-card{padding:30px 20px;}
+    .slider-slide{flex-direction:column;text-align:center;padding:30px 20px;}
+    .section-header h2{font-size:2rem;}
+    .connect-card{padding:30px 20px;}
+  }
+  @media(max-width:480px){
+    .hero-title{font-size:2rem;}
+    .hero-image{width:150px;height:150px;font-size:3rem;}
+  }
 </style>
 </head>
-<body class="intro-active">
+<body>
 
-<div id="intro-screen">
-  <div class="intro-doodles">
-    <svg style="top:16%; left:14%; width:56px; --r:-10deg; animation-delay:1.6s" viewBox="0 0 60 70" xmlns="http://www.w3.org/2000/svg">
-      <rect x="4" y="2" width="52" height="66" rx="6" fill="var(--blue-note)" stroke="var(--ink)" stroke-width="2"/>
-      <line x1="14" y1="20" x2="46" y2="20" stroke="var(--paper)" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="14" y1="32" x2="46" y2="32" stroke="var(--paper)" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="14" y1="44" x2="38" y2="44" stroke="var(--paper)" stroke-width="2.5" stroke-linecap="round"/>
-      <circle cx="4" cy="14" r="2.4" fill="var(--ink)"/>
-      <circle cx="4" cy="28" r="2.4" fill="var(--ink)"/>
-      <circle cx="4" cy="42" r="2.4" fill="var(--ink)"/>
-      <circle cx="4" cy="56" r="2.4" fill="var(--ink)"/>
-    </svg>
-    <svg style="top:24%; right:16%; width:70px; --r:22deg; animation-delay:1.8s" viewBox="0 0 90 20" xmlns="http://www.w3.org/2000/svg">
-      <rect x="14" y="6" width="62" height="9" rx="2" fill="var(--yellow)" stroke="var(--ink)" stroke-width="2"/>
-      <polygon points="4,10.5 14,4 14,17" fill="#E0A86B" stroke="var(--ink)" stroke-width="2" stroke-linejoin="round"/>
-      <rect x="76" y="6" width="10" height="9" rx="2" fill="var(--coral)" stroke="var(--ink)" stroke-width="2"/>
-    </svg>
-    <svg style="bottom:24%; left:18%; width:42px; --r:-8deg; animation-delay:2.0s" viewBox="0 0 50 60" xmlns="http://www.w3.org/2000/svg">
-      <rect x="4" y="2" width="42" height="56" rx="5" fill="#FFFFFF" stroke="var(--ink)" stroke-width="1.6"/>
-      <line x1="12" y1="18" x2="38" y2="18" stroke="var(--paper-2)" stroke-width="1.6" stroke-linecap="round"/>
-      <line x1="12" y1="28" x2="38" y2="28" stroke="var(--paper-2)" stroke-width="1.6" stroke-linecap="round"/>
-      <line x1="12" y1="38" x2="30" y2="38" stroke="var(--paper-2)" stroke-width="1.6" stroke-linecap="round"/>
-    </svg>
-    <svg style="bottom:20%; right:14%; width:76px; --r:16deg; animation-delay:2.2s" viewBox="0 0 90 18" xmlns="http://www.w3.org/2000/svg">
-      <rect x="10" y="5" width="68" height="8" rx="3" fill="var(--ink)" />
-      <rect x="10" y="5" width="68" height="8" rx="3" fill="var(--sage)" opacity=".85"/>
-      <polygon points="2,9 10,3 10,15" fill="var(--ink)"/>
-      <rect x="78" y="5" width="8" height="8" rx="2" fill="var(--yellow)" stroke="var(--ink)" stroke-width="1.5"/>
-    </svg>
-    <svg style="top:10%; left:44%; width:38px; --r:-12deg; animation-delay:2.4s" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
-      <path d="M4 4 H46 V46 H14 L4 36 Z" fill="var(--coral)" stroke="var(--ink)" stroke-width="2" stroke-linejoin="round"/>
-      <path d="M4 36 H14 V46 Z" fill="var(--coral-dark)" stroke="var(--ink)" stroke-width="1.5" stroke-linejoin="round"/>
-    </svg>
-    <svg style="bottom:8%; left:46%; width:44px; --r:8deg; animation-delay:2.6s" viewBox="0 0 60 70" xmlns="http://www.w3.org/2000/svg">
-      <rect x="4" y="2" width="52" height="66" rx="6" fill="var(--sage)" stroke="var(--ink)" stroke-width="2"/>
-      <line x1="14" y1="20" x2="46" y2="20" stroke="var(--paper)" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="14" y1="32" x2="46" y2="32" stroke="var(--paper)" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="14" y1="44" x2="38" y2="44" stroke="var(--paper)" stroke-width="2.5" stroke-linecap="round"/>
-    </svg>
-  </div>
-  <div class="intro-logo">
-    𝒩𝑒𝓇𝑜𝓋𝒶 <span class="heart">♡</span>
-  </div>
-  <div class="intro-tagline" dir="ltr">Every Great Story Starts with a Blank Page.</div>
-  <div class="intro-desc" dir="ltr">Where elegance meets creativity — beautifully designed notebooks, planners, stickers, and stationery crafted with love to inspire your ideas and organize your days. 📖💕</div>
-  <a href="#products" class="intro-btn" onclick="skipIntro()">Explore Collection ✨</a>
-</div>
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar" id="navbar">
+  <div class="nav-logo">𝒩𝑒𝓇𝑜𝓋𝒶 <span class="heart">♡</span></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#products">المنتجات</a></li>
+    <li><a href="#featured">المميزات</a></li>
+    <li><a href="#about">عن البراند</a></li>
+    <li><a href="#connect" class="nav-cta"><i class="fas fa-paper-plane"></i> اطلب دلوقتي</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+</nav>
 
-<script>
-  function skipIntro(){
-    var intro = document.getElementById('intro-screen');
-    intro.classList.add('intro-hide');
-    document.body.classList.remove('intro-active');
-  }
-  window.addEventListener('load', function(){
-    setTimeout(skipIntro, 3600);
-  });
-</script>
-
-<header>
-  <div class="logo">
-    <span>𝒩</span>
-    𝒩𝑒𝓇𝑜𝓋𝒶 ♡
-  </div>
-  <nav>
-    <ul>
-      <li><a href="#products">المنتجات</a></li>
-      <li><a href="https://m.me/61591859690088" class="nav-cta">اطلب دلوقتي</a></li>
-    </ul>
-  </nav>
-</header>
-
+<!-- ===== HERO ===== -->
 <section class="hero">
-  <div class="hero-grid">
-    <div>
-      <span class="eyebrow" dir="ltr">✨ Write. Dream. Create.</span>
-      <h1 dir="ltr">Where every <span class="scribble">idea</span><br>finds a beautiful place 🌸</h1>
-      <p class="lead" dir="ltr">Welcome to 𝒩𝑒𝓇𝑜𝓋𝒶 ♡, where elegance meets creativity. From beautifully designed notebooks and planners to charming stickers and stationery, every piece is crafted with love to inspire your ideas, organize your days, and make every page unforgettable. 📖💕</p>
-      <div class="hero-actions">
-        <a href="#products" class="btn btn-primary">Explore Collection ✨</a>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      ✨ NEW COLLECTION 2026
+    </div>
+    <h1 class="hero-title">
+      Where Every <br><span class="highlight">Idea</span> Finds a Beautiful Place
+    </h1>
+    <p class="hero-sub">
+      Welcome to 𝒩𝑒𝓇𝑜𝓋𝒶 ♡ — where study meets style. We curate a premium selection of notebooks, planners, organizers, pens, highlighters, and study accessories to make every study session feel special. Thoughtfully chosen for students, creatives, and dreamers who believe that organization is the first step to success. Elevate your study game with tools that are as beautiful as they are functional. ✨📚
+    </p>
+    <div class="hero-btns">
+      <a href="#products" class="btn-primary"><i class="fas fa-arrow-left"></i> Explore Collection</a>
+      <a href="#connect" class="btn-secondary"><i class="fas fa-comment"></i> Let's Talk</a>
+    </div>
+  </div>
+  <div class="hero-image">
+    <span class="emoji">📖✨</span>
+  </div>
+</section>
+
+<!-- ===== PRODUCTS ===== -->
+<section id="products">
+  <div class="section-header">
+    <span class="tag">✦ Collection</span>
+    <h2>كل قطعة بتحكي حكاية</h2>
+    <p>من الدفتر اللي هيحتفظ بأفكارك، للاستيكر اللي هيفكّرك بأهم لحظاتك</p>
+  </div>
+  <div class="products-grid">
+    <div class="product-card" onclick="openNotebookShop()">
+      <div class="product-icon">📒</div>
+      <h3>Notebooks</h3>
+      <p>دوّن أفكارك، خططك، ومذكراتك اليومية في دفتر أنيق مصمم ليكون رفيقك في كل لحظة.</p>
+      <span class="shop-link">تصفح المنتجات <i class="fas fa-arrow-left"></i></span>
+    </div>
+    <div class="product-card" onclick="openStickerShop()">
+      <div class="product-icon">✨</div>
+      <h3>Stickers</h3>
+      <p>زيّن اللاب توب، الدفاتر، التابلت، أو أي مساحة تحب تضيف لها لمسة تعبر عن شخصيتك.</p>
+      <span class="shop-link">تصفح المنتجات <i class="fas fa-arrow-left"></i></span>
+    </div>
+    <div class="product-card" onclick="openPlannerShop()">
+      <div class="product-icon">📅</div>
+      <h3>Daily Planner</h3>
+      <p>نظّم يومك، رتّب أولوياتك، وتابع أهدافك اليومية لتنجز أكثر بكل سهولة.</p>
+      <span class="shop-link">تصفح المنتجات <i class="fas fa-arrow-left"></i></span>
+    </div>
+    <div class="product-card">
+      <div class="product-icon">📝</div>
+      <h3>Sticky Notes</h3>
+      <p>اكتب تذكيراتك، مواعيدك، أو رسائلك اللطيفة والصقها في أي مكان.</p>
+      <span class="shop-link">تصفح المنتجات <i class="fas fa-arrow-left"></i></span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURED SLIDER ===== -->
+<section id="featured">
+  <div class="section-header">
+    <span class="tag">✦ Featured</span>
+    <h2>منتجات مميزة</h2>
+    <p>اخترنا لك أجمل المنتجات التي تناسب أسلوبك</p>
+  </div>
+  <div class="slider-container">
+    <div class="slider-track" id="sliderTrack">
+      <div class="slider-slide">
+        <div class="slide-content">
+          <h2>📒 Notebook Collection</h2>
+          <p>دفاتر أنيقة بتصميمات عصرية وجودة عالية، مثالية لكتابة أفكارك ومذكراتك اليومية.</p>
+          <a href="#products" class="slide-btn">تسوق الآن</a>
+        </div>
+        <div style="font-size:5rem;">📓✨</div>
+      </div>
+      <div class="slider-slide">
+        <div class="slide-content">
+          <h2>✨ Sticker Packs</h2>
+          <p>مجموعة من الاستيكرات الكيوت والتفاؤلية لتزيين متعلقاتك وإضفاء لمسة فريدة.</p>
+          <a href="#products" class="slide-btn">تسوق الآن</a>
+        </div>
+        <div style="font-size:5rem;">🎀🌟</div>
+      </div>
+      <div class="slider-slide">
+        <div class="slide-content">
+          <h2>📅 Daily Planner</h2>
+          <p>نظّم يومك بكل سهولة مع بلانر يومي أنيق يساعدك على تحقيق أهدافك وإنجاز مهامك.</p>
+          <a href="#products" class="slide-btn">تسوق الآن</a>
+        </div>
+        <div style="font-size:5rem;">🗓️💫</div>
       </div>
     </div>
   </div>
-</section>
-
-<section id="products">
-  <div class="section-head">
-    <span class="tag accent">Collection</span>
-    <h2>كل قطعة بتحكي حكاية</h2>
-    <p>من الدفتر اللي هيحتفظ بأفكارك، للستيكي نوت اللي هيفكّرك بأهم لحظاتك، وللاستيكرات اللي هتضيف لمستك الخاصة... صممنا كل تفصيلة علشان تشبهك</p>
-  </div>
-  <div class="products">
-    <div class="pcard c1" onclick="openNotebookShop()">
-      <div class="icon" onclick="event.stopPropagation(); openNotebookShop()">📒</div>
-      <h3>Notebooks</h3>
-      <p>دوّن أفكارك، خططك، ومذكراتك اليومية في دفتر أنيق مصمم ليكون رفيقك في كل لحظة. 🤍</p>
-      <div class="click-hint">اضغط على 📒 للتصفح →</div>
-    </div>
-    <div class="pcard c2" onclick="openStickerShop()">
-      <div class="icon" onclick="event.stopPropagation(); openStickerShop()">✨</div>
-      <h3>Stickers</h3>
-      <p>زيّن اللاب توب، الدفاتر، التابلت، جراب الموبايل، أو أي مساحة تحب تضيف لها لمسة تعبر عن شخصيتك. 💫</p>
-      <div class="click-hint">اضغط على ✨ للتصفح →</div>
-    </div>
-    <div class="pcard c3" onclick="openPlannerShop()">
-      <div class="icon" onclick="event.stopPropagation(); openPlannerShop()">📅</div>
-      <h3>Daily Planner</h3>
-      <p>نظّم يومك، رتّب أولوياتك، وتابع أهدافك اليومية لتنجز أكثر بكل سهولة. ✅</p>
-      <div class="click-hint">اضغط على 📅 للتصفح →</div>
-    </div>
-    <div class="pcard c4">
-      <div class="icon">📝</div>
-      <h3>Sticky Notes</h3>
-      <p>اكتب تذكيراتك، مواعيدك، أو رسائلك اللطيفة والصقها في أي مكان لتبقى كل مهامك أمام عينيك. 💕</p>
-    </div>
+  <div class="slider-controls">
+    <button onclick="prevSlide()"><i class="fas fa-chevron-right"></i></button>
+    <button onclick="nextSlide()"><i class="fas fa-chevron-left"></i></button>
   </div>
 </section>
 
-<!-- STICKER SHOP -->
-<div id="sticker-shop" class="sticker-shop">
-  <div class="section-head">
-    <div>
-      <span class="tag accent">✨ Sticker Collection</span>
-      <h2>اختار استيكرك المفضل</h2>
-      <p>كل استيكر مصمم بعناية علشان يضيف لمسة فريدة لحاجاتك</p>
+<!-- ===== REVIEW SECTION ===== -->
+<section class="review-section" id="review">
+  <div class="review-card">
+    <div class="happy-girl">🥰</div>
+    
+    <h3>شاركنا رأيك 💕</h3>
+    <p class="sub">رأيك يهمنا جداً ويساعدنا نكون أفضل 🌸</p>
+    
+    <div class="encourage-box">
+      <span>📝</span>
+      <span>قولنا إيه رأيك في المنتجات؟</span>
+      <span style="font-size:1.2rem;">👇</span>
     </div>
-    <button class="back-btn" onclick="closeStickerShop()">← رجوع للمنتجات</button>
-  </div>
-  <div class="sticker-grid" id="sticker-grid"></div>
-</div>
+    
+    <form id="reviewForm" onsubmit="addReview(event)">
+      <div class="star-rating" id="starRating">
+        <span class="star" data-value="1">★</span>
+        <span class="star" data-value="2">★</span>
+        <span class="star" data-value="3">★</span>
+        <span class="star" data-value="4">★</span>
+        <span class="star" data-value="5">★</span>
+      </div>
+      <input type="hidden" id="ratingValue" value="0">
 
-<!-- Lightbox for image zoom -->
-<div id="lightbox" class="lightbox" onclick="closeLightbox()">
-  <button class="lightbox-close" onclick="event.stopPropagation(); closeLightbox()">×</button>
-  <img id="lightbox-img" src="" alt="Sticker Preview" style="max-width:90vw; max-height:85vh; object-fit:contain;">
-</div>
+      <div class="form-group">
+        <label>👤 اسمك</label>
+        <input type="text" id="reviewName" placeholder="اكتب اسمك هنا" required>
+      </div>
 
-<script>
-  // ============================================
-  // CONFIG: Facebook Page ID
-  // ============================================
-  var FACEBOOK_PAGE_ID = "61591859690088";
+      <div class="form-group">
+        <label>📝 رأيك عن المنتجات</label>
+        <textarea id="reviewText" placeholder="شاركنا تجربتك مع المنتجات... إحنا متشوقين نسمع رأيك! 💕" required></textarea>
+      </div>
 
-  var stickers = [
-    {
-      name: "شيت استيكرات ميكس 🎀",
-      desc: "مجموعة متنوعة من الاستيكرات الكيوت والتفاؤلية: قطة، بطة، دولفين، سماعات، قهوة، وعبارات تحفيزية",
-      price: "10 EGP",
-      img: "https://i.postimg.cc/mZ9RNX4T/Whats-App-Image-2026-08-06-at-4-15-19-AM.jpg",
-      badge: "New"
-    }
-  ];
+      <button type="submit" class="submit-review">
+        <i class="fas fa-paper-plane"></i> إرسال رأيك
+      </button>
+    </form>
 
-  function renderStickers() {
-    var grid = document.getElementById("sticker-grid");
-    grid.innerHTML = "";
-
-    stickers.forEach(function(s) {
-      var badgeClass = "";
-      if (s.badge === "New") badgeClass = "new";
-      if (s.badge === "Hot") badgeClass = "hot";
-
-      var badge = s.badge
-        ? `<div class="sticker-badge ${badgeClass}">${s.badge}</div>`
-        : "";
-
-      var card = `
-        <div class="sticker-card">
-          <div class="sticker-img-wrap" onclick="openLightbox('${s.img}')">
-            <img class="sticker-img" src="${s.img}" alt="${s.name}" loading="lazy">
-            ${badge}
-          </div>
-
-          <div class="sticker-info">
-            <h3>${s.name}</h3>
-            <p>${s.desc}</p>
-
-            <div class="sticker-bottom">
-              <div class="sticker-price">
-                ${s.price}
-                
-              </div>
-
-              <button class="add-btn" onclick="orderSticker('${s.name}')">
-                أضف للسلة ✨
-              </button>
-            </div>
-          </div>
-        </div>
-      `;
-
-      grid.innerHTML += card;
-    });
-  }
-
-  function openStickerShop() {
-    document.getElementById("sticker-shop").classList.add("active");
-    document.getElementById("products").style.display = "none";
-    window.scrollTo({
-      top: document.getElementById("sticker-shop").offsetTop - 80,
-      behavior: "smooth"
-    });
-    renderStickers();
-  }
-
-  function closeStickerShop() {
-    document.getElementById("sticker-shop").classList.remove("active");
-    document.getElementById("products").style.display = "block";
-    window.scrollTo({
-      top: document.getElementById("products").offsetTop - 80,
-      behavior: "smooth"
-    });
-  }
-
-    // ===== CART SYSTEM =====
-  var cart = [];
-
-  function parsePrice(priceStr) {
-    var match = priceStr.match(/\d+/);
-    return match ? parseInt(match[0]) : 0;
-  }
-
-  function addToCart(name, priceStr, img, type) {
-    var existing = cart.find(function(item) { return item.name === name; });
-    if (existing) {
-      existing.qty += 1;
-    } else {
-      cart.push({
-        name: name,
-        priceStr: priceStr,
-        price: parsePrice(priceStr),
-        img: img,
-        type: type,
-        qty: 1
-      });
-    }
-    updateCartUI();
-    // Show brief feedback
-    var btn = event.target;
-    var originalText = btn.innerHTML;
-    btn.innerHTML = "✅ تمت الإضافة";
-    btn.style.background = "var(--sage)";
-    setTimeout(function() {
-      btn.innerHTML = originalText;
-      btn.style.background = "";
-    }, 1200);
-  }
-
-  function removeFromCart(index) {
-    cart.splice(index, 1);
-    updateCartUI();
-  }
-
-  function changeQty(index, delta) {
-    cart[index].qty += delta;
-    if (cart[index].qty < 1) cart[index].qty = 1;
-    updateCartUI();
-  }
-
-  function updateCartUI() {
-    var countEl = document.getElementById("cart-count");
-    var itemsEl = document.getElementById("cart-items");
-    var totalEl = document.getElementById("cart-total-section");
-    var actionsEl = document.getElementById("cart-actions");
-
-    var totalItems = cart.reduce(function(sum, item) { return sum + item.qty; }, 0);
-    if (totalItems > 0) {
-      countEl.textContent = totalItems;
-      countEl.style.display = "flex";
-    } else {
-      countEl.style.display = "none";
-    }
-
-    if (cart.length === 0) {
-      itemsEl.innerHTML = '<div class="cart-empty"><div class="cart-empty-icon">🛍️</div><div>السلة فاضية لسه</div><div style="font-size:.8rem; margin-top:4px;">اختار منتجاتك المفضلة الأول</div></div>';
-      totalEl.innerHTML = "";
-      actionsEl.style.display = "none";
-      return;
-    }
-
-    var html = "";
-    var grandTotal = 0;
-    cart.forEach(function(item, i) {
-      var itemTotal = item.price * item.qty;
-      grandTotal += itemTotal;
-      html += '<div class="cart-item">' +
-        '<img src="' + item.img + '" alt="' + item.name + '">' +
-        '<div class="cart-item-info">' +
-          '<h4>' + item.name + '</h4>' +
-          '<span>' + item.priceStr + ' × ' + item.qty + ' = ' + itemTotal + ' EGP</span>' +
-        '</div>' +
-        '<div class="cart-qty-control">' +
-          '<button onclick="changeQty(' + i + ', -1)">−</button>' +
-          '<span>' + item.qty + '</span>' +
-          '<button onclick="changeQty(' + i + ', 1)">+</button>' +
-        '</div>' +
-        '<button class="cart-remove" onclick="removeFromCart(' + i + ')">🗑️</button>' +
-      '</div>';
-    });
-    itemsEl.innerHTML = html;
-
-    totalEl.innerHTML = '<div class="cart-total-box">' +
-      '<div class="total-label">السعر الكلي للأوردر</div>' +
-      '<div class="total-price">' + grandTotal + ' EGP</div>' +
-    '</div>';
-    actionsEl.style.display = "flex";
-  }
-
-  function openCart() {
-    document.getElementById("cart-modal").classList.add("active");
-    document.body.style.overflow = "hidden";
-    updateCartUI();
-  }
-
-  function closeCart(e) {
-    if (!e || e.target === document.getElementById("cart-modal")) {
-      document.getElementById("cart-modal").classList.remove("active");
-      document.body.style.overflow = "";
-    }
-  }
-
-  function checkoutCart() {
-    closeCart();
-    document.getElementById("checkout-modal").classList.add("active");
-    document.body.style.overflow = "hidden";
-  }
-
-  function closeCheckout(e) {
-    if (!e || e.target === document.getElementById("checkout-modal")) {
-      document.getElementById("checkout-modal").classList.remove("active");
-      document.body.style.overflow = "";
-    }
-  }
-  function closeSuccessModal(e) {
-    if (!e || e.target === document.getElementById("success-modal")) {
-      document.getElementById("success-modal").classList.remove("active");
-      document.body.style.overflow = "";
-    }
-  }
-
-  function sendCartOrder() {
-    var name = document.getElementById("checkout-name").value.trim();
-    if (!name) {
-      alert("من فضلك اكتب اسمك الأول 😊");
-      return;
-    }
-    var msg = "أهلاً! أنا " + name + " 🌸\n\nعايز أطلب الأوردر التالي:\n";
-    var grandTotal = 0;
-    cart.forEach(function(item) {
-      var itemTotal = item.price * item.qty;
-      grandTotal += itemTotal;
-      var typeLabel = item.type === "sticker" ? "استيكر" : item.type === "planner" ? "بلانر" : "دفتر";
-      msg += "\n• " + typeLabel + ": " + item.name + "\n  الكمية: " + item.qty + " | السعر: " + itemTotal + " EGP";
-
-    });
-    msg += "\n\n💰 السعر الكلي: " + grandTotal + " EGP";
-    msg += "\n\n🌹 Thank You! Your order has been sent successfully. We'll get back to you very soon. 💕";
-
-    // Facebook Messenger link
-    var fbUrl = "https://m.me/" + FACEBOOK_PAGE_ID + "?text=" + encodeURIComponent(msg);
-    window.open(fbUrl, "_blank");
-
-    cart = [];
-    updateCartUI();
-    closeCheckout();
-    setTimeout(function(){
-      document.getElementById("success-modal").classList.add("active");
-      document.body.style.overflow = "hidden";
-    }, 300);
-  }
-
-  function orderSticker(name) {
-    var s = stickers.find(function(x){ return x.name === name; });
-    if (s) addToCart(s.name, s.price, s.img, "sticker");
-  }
-
-  function orderPlanner(name) {
-    var p = planners.find(function(x){ return x.name === name; });
-    if (p) addToCart(p.name, p.price, p.img, "planner");
-  }
-
-  function orderNotebook(name) {
-    var n = notebooks.find(function(x){ return x.name === name; });
-    if (n) addToCart(n.name, n.price, n.img, "notebook");
-  }
-
-  // Lightbox functions
-  function openLightbox(imgSrc) {
-    document.getElementById("lightbox-img").src = imgSrc;
-    document.getElementById("lightbox").classList.add("active");
-    document.body.style.overflow = "hidden";
-  }
-
-  function closeLightbox() {
-    document.getElementById("lightbox").classList.remove("active");
-    document.body.style.overflow = "";
-  }
-
-  // Close lightbox with Escape key
-  document.addEventListener("keydown", function(e) {
-    if (e.key === "Escape") closeLightbox();
-  });
-</script>
-
-<!-- PLANNER SHOP -->
-<div id="planner-shop" class="sticker-shop">
-  <div class="section-head">
-    <div>
-      <span class="tag accent">📅 Planner Collection</span>
-      <h2>اختار بلانرك المفضل</h2>
-      <p>بلانرات أنيقة لتنظيم يومك بأسلوب مميز</p>
+    <div class="reviews-header">
+      <span>💬</span>
+      <span>آراء عملائنا</span>
+      <span style="font-size:0.8rem;color:rgba(43,43,51,0.4);">(كل الآراء تظهر هنا)</span>
     </div>
-    <button class="back-btn" onclick="closePlannerShop()">← رجوع للمنتجات</button>
-  </div>
-  <div class="sticker-grid" id="planner-grid"></div>
-</div>
-
-<script>
-  var planners = [
-    {
-      name: "Aesthetic Daily Planner 📅",
-      desc: "بلانر يومي أنيق لتنظيم مهامك وأهدافك بأسلوب جذاب",
-      price: "50 EGP",
-      img: "https://i.postimg.cc/wvvmm24R/Chat-GPT-Image-Jul-4-2026-06-17-31-AM.png",
-      badge: "Best Seller"
-    }
-  ];
-
-  function renderPlanners() {
-    var grid = document.getElementById("planner-grid");
-    grid.innerHTML = "";
-
-    planners.forEach(function(s) {
-      var badgeClass = "";
-      if (s.badge === "New") badgeClass = "new";
-      if (s.badge === "Hot") badgeClass = "hot";
-
-      var badge = s.badge
-        ? `<div class="sticker-badge ${badgeClass}">${s.badge}</div>`
-        : "";
-
-      var card = `
-        <div class="sticker-card">
-          <div class="sticker-img-wrap" onclick="openLightbox('${s.img}')">
-            <img class="sticker-img" src="${s.img}" alt="${s.name}" loading="lazy">
-            ${badge}
-          </div>
-
-          <div class="sticker-info">
-            <h3>${s.name}</h3>
-            <p>${s.desc}</p>
-
-            <div class="sticker-bottom">
-              <div class="sticker-price">
-                ${s.price}
-              </div>
-
-              <button class="add-btn" onclick="orderPlanner('${s.name}')">
-                أضف للسلة ✨
-              </button>
-            </div>
-          </div>
-        </div>
-      `;
-
-      grid.innerHTML += card;
-    });
-  }
-
-  function openPlannerShop() {
-    document.getElementById("planner-shop").classList.add("active");
-    document.getElementById("products").style.display = "none";
-    document.getElementById("sticker-shop").classList.remove("active");
-    window.scrollTo({
-      top: document.getElementById("planner-shop").offsetTop - 80,
-      behavior: "smooth"
-    });
-    renderPlanners();
-  }
-
-  function closePlannerShop() {
-    document.getElementById("planner-shop").classList.remove("active");
-    document.getElementById("products").style.display = "block";
-    window.scrollTo({
-      top: document.getElementById("products").offsetTop - 80,
-      behavior: "smooth"
-    });
-  }
-
-  function orderPlanner(name) {
-    var p = planners.find(function(x){ return x.name === name; });
-    if (p) addToCart(p.name, p.price, p.img, "planner");
-  }
-</script>
-
-<!-- NOTEBOOK SHOP -->
-<div id="notebook-shop" class="sticker-shop">
-  <div class="section-head">
-    <div>
-      <span class="tag accent">📒 Notebook Collection</span>
-      <h2>اختار دفترك المفضل</h2>
-      <p>دفاتر أنيقة لكل أفكارك ومذكراتك</p>
+    
+    <div class="reviews-display" id="reviewsDisplay">
+      <div class="loading-reviews">⏳ جاري تحميل الآراء...</div>
     </div>
-    <button class="back-btn" onclick="closeNotebookShop()">← رجوع للمنتجات</button>
   </div>
-  <div class="sticker-grid" id="notebook-grid"></div>
-</div>
+</section>
 
-<script>
-  var notebooks = [
-    {
-      name: "Catpresso Notebook 100p 📒",
-      desc: "دفتر أنيق مثالي بغلاف كوشيه عالي الجودة، 100 ورقة تقدر تكتب فيها محاضراتك وأفكارك بشكل عصري وأنيق 📒✨",
-      price: "100 EGP",
-      img: "https://i.postimg.cc/T1Mz4x6t/Chat-GPT-Image-Aug-6-2026-04-13-46-AM.png",
-      badge: "New"
-    },
-    {
-      name: "Notebook 100 Pages 📒",
-      desc: "دفتر 100 صفحة أنيق لجميع أفكارك ومذكراتك",
-      price: "100 EGP",
-      img: "https://i.postimg.cc/nzrYKpS0/Chat-GPT-Image-Jul-4-2026-07-16-46-AM.png",
-      badge: "Best Seller"
-    },
-    {
-      name: "Notebook 50 Pages 📓",
-      desc: "دفتر 50 صفحة مدمج سهل الحمل لأفكارك السريعة",
-      price: "50 EGP",
-      img: "https://i.postimg.cc/nzrYKpS0/Chat-GPT-Image-Jul-4-2026-07-16-46-AM.png",
-      badge: "New"
-    }
-  ];
+<!-- ===== ABOUT BRAND ===== -->
+<section id="about">
+  <div class="section-header">
+    <span class="tag">✦ About 𝒩𝑒𝓇𝑜𝓋𝒶</span>
+    <h2>حكاية بدأت بحب</h2>
+    <p>𝒩𝑒𝓇𝑜𝓋𝒶 ♡ مش مجرد منتجات، دي رسالة إن كل فكرة تستحق مكان جميل. بنقدملك مجموعة مختارة بعناية من أجمل الدفاتر، البلانرات، المنظمات، الأقلام، الهايلايتر، وإكسسوارات الدراسة عشان تكون رفيقة في رحلتك اليومية.</p>
+  </div>
+  <div class="about-grid">
+    <div class="about-item">
+      <span class="icon">✨</span>
+      <h3>جودة عالية</h3>
+      <p>كل منتج بنختاره بعناية بأفضل الخامات عشان يدوم معاكي طويلاً</p>
+    </div>
+    <div class="about-item">
+      <span class="icon">🎀</span>
+      <h3>تصميم أنيق</h3>
+      <p>لمسة جمالية تناسب كل الأذواق، عشان كل تفصيلة تعبر عن شخصيتك</p>
+    </div>
+    <div class="about-item">
+      <span class="icon">💕</span>
+      <h3>شحن سريع</h3>
+      <p>نهتم بوصول منتجاتك بأمان وسرعة، عشان تستمتعي بيهم في أقرب وقت</p>
+    </div>
+  </div>
+</section>
 
-  function renderNotebooks() {
-    var grid = document.getElementById("notebook-grid");
-    grid.innerHTML = "";
-
-    notebooks.forEach(function(s) {
-      var badgeClass = "";
-      if (s.badge === "New") badgeClass = "new";
-      if (s.badge === "Hot") badgeClass = "hot";
-
-      var badge = s.badge
-        ? `<div class="sticker-badge ${badgeClass}">${s.badge}</div>`
-        : "";
-
-      var card = `
-        <div class="sticker-card">
-          <div class="sticker-img-wrap" onclick="openLightbox('${s.img}')">
-            <img class="sticker-img" src="${s.img}" alt="${s.name}" loading="lazy">
-            ${badge}
-          </div>
-
-          <div class="sticker-info">
-            <h3>${s.name}</h3>
-            <p>${s.desc}</p>
-
-            <div class="sticker-bottom">
-              <div class="sticker-price">
-                ${s.price}
-              </div>
-
-              <button class="add-btn" onclick="orderNotebook('${s.name}')">
-                أضف للسلة ✨
-              </button>
-            </div>
-          </div>
-        </div>
-      `;
-
-      grid.innerHTML += card;
-    });
-  }
-
-  function openNotebookShop() {
-    document.getElementById("notebook-shop").classList.add("active");
-    document.getElementById("products").style.display = "none";
-    document.getElementById("sticker-shop").classList.remove("active");
-    document.getElementById("planner-shop").classList.remove("active");
-    window.scrollTo({
-      top: document.getElementById("notebook-shop").offsetTop - 80,
-      behavior: "smooth"
-    });
-    renderNotebooks();
-  }
-
-  function closeNotebookShop() {
-    document.getElementById("notebook-shop").classList.remove("active");
-    document.getElementById("products").style.display = "block";
-    window.scrollTo({
-      top: document.getElementById("products").offsetTop - 80,
-      behavior: "smooth"
-    });
-  }
-
-  function orderNotebook(name) {
-    var n = notebooks.find(function(x){ return x.name === name; });
-    if (n) addToCart(n.name, n.price, n.img, "notebook");
-  }
-</script>
-
+<!-- ===== CONNECT ===== -->
 <section id="connect" class="connect-section">
   <div class="connect-card">
-    <span class="connect-mark">🤍</span>
-    <h2 dir="ltr">Let's Stay Connected</h2>
-    <p dir="ltr">Thank you for visiting 𝒩𝑒𝓇𝑜𝓋𝒶 ♡. We can't wait to be part of your next idea, plan, or story. If you have any questions, feel free to reach out—we're always happy to help.</p>
-    <div class="connect-links">
-      <a href="https://m.me/61591859690088" class="connect-link messenger">
-        <span class="connect-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="18" height="18">
-            <path fill="currentColor" d="M12 2C6.486 2 2 6.262 2 11.5c0 2.438.992 4.689 2.639 6.373L4 22l4.416-1.808A11.08 11.08 0 0 0 12 20.5c5.514 0 10-4.262 10-9.5S17.514 2 12 2zm1.5 12.5l-3-3.5-4.5 4.5L12 11.5l3 3.5 4.5-4.5-3 3.5z"/>
-          </svg>
-        </span>
-        <span dir="ltr">Messenger: 𝒩𝑒𝓇𝑜𝓋𝒶 ♡</span>
-      </a>
-      <a href="https://chat.whatsapp.com/Gdnfc5x3JYJHm4hoKU1CoA" class="connect-link wa-group">
-        <span class="connect-icon">
-          <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" width="18" height="18">
-            <path fill="currentColor" d="M16.004 3C9.377 3 4 8.373 4 15c0 2.34.664 4.523 1.813 6.379L4 29l7.797-1.773A11.93 11.93 0 0 0 16.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3Zm0 21.9a9.86 9.86 0 0 1-5.03-1.377l-.36-.213-4.63 1.052 1.08-4.51-.235-.372A9.86 9.86 0 0 1 6.1 15c0-5.46 4.444-9.9 9.904-9.9 5.46 0 9.896 4.44 9.896 9.9s-4.436 9.9-9.896 9.9Zm5.42-7.41c-.297-.148-1.756-.867-2.028-.966-.272-.099-.47-.148-.668.148-.198.297-.767.966-.94 1.164-.173.198-.347.223-.644.075-.297-.148-1.254-.462-2.388-1.472-.883-.787-1.48-1.76-1.653-2.057-.173-.297-.019-.457.13-.605.133-.132.297-.347.446-.52.148-.173.198-.297.297-.495.099-.198.05-.372-.025-.52-.075-.148-.668-1.61-.915-2.204-.24-.578-.484-.5-.668-.51-.173-.008-.372-.01-.57-.01-.198 0-.52.075-.792.372-.272.297-1.04 1.017-1.04 2.478 0 1.462 1.065 2.874 1.213 3.072.148.198 2.096 3.2 5.078 4.487.71.306 1.263.489 1.695.626.712.226 1.36.194 1.872.118.571-.085 1.756-.718 2.004-1.412.248-.693.248-1.288.173-1.412-.074-.124-.272-.198-.57-.347Z"/>
-          </svg>
-        </span>
-        <span dir="ltr">WhatsApp Group</span>
-      </a>
-      <a href="https://www.facebook.com/share/1DujamZxFt/" class="connect-link fb">
-        <span class="connect-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="18" height="18">
-            <path fill="currentColor" d="M22 12.06C22 6.505 17.523 2 12 2S2 6.505 2 12.06c0 5.02 3.657 9.184 8.438 9.94v-7.03H7.898v-2.91h2.54V9.845c0-2.522 1.492-3.916 3.777-3.916 1.094 0 2.238.196 2.238.196v2.475h-1.26c-1.243 0-1.63.775-1.63 1.57v1.89h2.773l-.443 2.91h-2.33V22c4.78-.756 8.437-4.92 8.437-9.94Z"/>
-          </svg>
-        </span>
-        <span dir="ltr">Facebook: 𝒩𝑒𝓇𝑜𝓋𝒶 ♡</span>
-      </a>
-      <a href="https://www.instagram.com/shop.nerova" class="connect-link ig">
-        <span class="connect-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="18" height="18">
-            <path fill="currentColor" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
-          </svg>
-        </span>
-        <span dir="ltr">Instagram: shop.nerova</span>
-      </a>
+    <div style="font-size:3rem;margin-bottom:10px;">🤍</div>
+    <h2>Let's Stay Connected</h2>
+    <p>Thank you for visiting 𝒩𝑒𝓇𝑜𝓋𝒶 ♡. We can't wait to be part of your next idea, plan, or story.</p>
+    <div class="social-links">
+      <a href="https://m.me/61591859690088" class="messenger"><i class="fab fa-facebook-messenger"></i> Messenger</a>
+      <a href="https://chat.whatsapp.com/Gdnfc5x3JYJHm4hoKU1CoA" class="whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+      <a href="https://www.facebook.com/share/1DujamZxFt/" class="facebook"><i class="fab fa-facebook"></i> Facebook</a>
+      <a href="https://www.instagram.com/shop.nerova" class="instagram"><i class="fab fa-instagram"></i> Instagram</a>
     </div>
   </div>
 </section>
 
-<footer class="footer-slim">
-  <div class="flogo">🎀𝒩𝑒𝓇𝑜𝓋𝒶 ♡</div>
-  <div>© 2026 𝒩𝑒𝓇𝑜𝓋𝒶 ♡. كل الحقوق محفوظة.</div>
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="brand">𝒩𝑒𝓇𝑜𝓋𝒶 ♡</div>
+  <div>© 2026 𝒩𝑒𝓇𝑜𝓋𝒶 ♡. All rights reserved.</div>
 </footer>
 
-
-<!-- CART BUTTON -->
-<button class="cart-btn" onclick="openCart()" title="سلة المشتريات">
-  🛒
-  <span class="cart-count" id="cart-count" style="display:none">0</span>
+<!-- ===== BACK TO TOP ===== -->
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <i class="fas fa-arrow-up"></i>
 </button>
 
-<!-- CART MODAL -->
-<div id="cart-modal" class="cart-modal" onclick="closeCart(event)">
-  <div class="cart-box" onclick="event.stopPropagation()">
-    <h3>🛒 سلة مشترياتك</h3>
-    <p class="sub" id="cart-subtitle">كل اللي اخترته في مكان واحد</p>
-    <div id="cart-items"></div>
-    <div id="cart-total-section"></div>
-    <div class="cart-actions" id="cart-actions" style="display:none">
-      <button class="close-btn" onclick="closeCart()">استمر في التسوق</button>
-      <button class="checkout-btn" onclick="checkoutCart()">اطلب الآن ✨</button>
-    </div>
-  </div>
-</div>
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+  // =============================================
+  // 🔥 Firebase Config - Nerova (تم التحديث)
+  // =============================================
+  const firebaseConfig = {
+    apiKey: "AIzaSyCQwej2RsXyRkDbEKmjKHduoszjrOri_G4",
+    authDomain: "nerova-9960b.firebaseapp.com",
+    databaseURL: "https://nerova-9960b-default-rtdb.firebaseio.com",
+    projectId: "nerova-9960b",
+    storageBucket: "nerova-9960b.firebasestorage.app",
+    messagingSenderId: "663051436632",
+    appId: "1:663051436632:web:cc44dd3e7a8bbc96d1002d",
+    measurementId: "G-G1QEKBC3LV"
+  };
 
-<!-- CHECKOUT NAME MODAL -->
-<div id="checkout-modal" class="order-modal" onclick="closeCheckout(event)">
-  <div class="order-box" onclick="event.stopPropagation()">
-    <h3>📋 تأكيد الطلب</h3>
-    <p class="sub">اكتب اسمك علشان نجهزلك الأوردر</p>
-    <div class="order-field">
-      <label>👤 اسمك</label>
-      <input type="text" id="checkout-name" placeholder="اكتب اسمك هنا">
-    </div>
-    <div class="order-actions">
-      <button class="cancel-btn" onclick="closeCheckout()">رجوع</button>
-      <button class="confirm-btn" onclick="sendCartOrder()">إرسال للماسنجر ✨</button>
-    </div>
-  </div>
-</div>
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const database = firebase.database();
 
+  // ===== STAR RATING =====
+  const stars = document.querySelectorAll('.star-rating .star');
+  const ratingInput = document.getElementById('ratingValue');
+  let selectedRating = 0;
 
-<!-- SUCCESS MODAL -->
-<div id="success-modal" class="success-modal" onclick="closeSuccessModal(event)">
-  <div class="success-box" onclick="event.stopPropagation()">
-    <span class="rose">🌹</span>
-    <h3>Thank You!</h3>
-    <p>Your order has been sent successfully.<br>We'll get back to you very soon. 💕</p>
-    <button class="done-btn" onclick="closeSuccessModal()">Done ✨</button>
-  </div>
-</div>
+  stars.forEach(star => {
+    star.addEventListener('click', function() {
+      selectedRating = parseInt(this.dataset.value);
+      ratingInput.value = selectedRating;
+      stars.forEach(s => {
+        s.classList.toggle('active', parseInt(s.dataset.value) <= selectedRating);
+      });
+    });
+    star.addEventListener('mouseenter', function() {
+      const val = parseInt(this.dataset.value);
+      stars.forEach(s => {
+        s.style.color = parseInt(s.dataset.value) <= val ? 'var(--accent)' : '#ddd';
+      });
+    });
+    star.addEventListener('mouseleave', function() {
+      stars.forEach(s => {
+        s.style.color = parseInt(s.dataset.value) <= selectedRating ? 'var(--accent)' : '#ddd';
+      });
+    });
+  });
+
+  // ===== SAVE REVIEW TO FIREBASE =====
+  function addReview(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('reviewName').value.trim();
+    const text = document.getElementById('reviewText').value.trim();
+    const rating = selectedRating;
+
+    if (!name) { alert('من فضلك اكتب اسمك 😊'); return; }
+    if (!text) { alert('من فضلك اكتب رأيك عن المنتجات 💕'); return; }
+    if (rating === 0) { alert('من فضلك اختار تقييم بالنجوم ⭐'); return; }
+
+    const now = new Date();
+    const dateStr = now.toLocaleDateString('ar-EG', { year: 'numeric', month: 'long', day: 'numeric' }) + 
+                    ' - ' + now.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
+
+    const review = {
+      name: name,
+      rating: rating,
+      text: text,
+      date: dateStr,
+      timestamp: Date.now()
+    };
+
+    database.ref('reviews').push(review)
+      .then(() => {
+        document.getElementById('reviewForm').reset();
+        selectedRating = 0;
+        ratingInput.value = 0;
+        stars.forEach(s => s.classList.remove('active'));
+        stars.forEach(s => s.style.color = '#ddd');
+        alert('✅ تم إضافة رأيك! شكراً لمشاركتنا 🌸');
+      })
+      .catch(error => {
+        alert('❌ حدث خطأ في حفظ رأيك. حاول مرة أخرى.');
+        console.error(error);
+      });
+  }
+
+  // ===== LOAD REVIEWS FROM FIREBASE =====
+  function loadReviews() {
+    const container = document.getElementById('reviewsDisplay');
+    container.innerHTML = '<div class="loading-reviews">⏳ جاري تحميل الآراء...</div>';
+
+    database.ref('reviews').orderByChild('timestamp').once('value')
+      .then(snapshot => {
+        const reviews = [];
+        snapshot.forEach(child => {
+          reviews.push(child.val());
+        });
+
+        reviews.reverse();
+
+        if (reviews.length === 0) {
+          container.innerHTML = `
+            <div class="no-reviews">
+              <span class="icon">💭</span>
+              <p>لا توجد آراء بعد... كن أول من يشاركنا رأيه! 🌸</p>
+            </div>
+          `;
+          return;
+        }
+
+        let html = '';
+        reviews.forEach(review => {
+          const starsStr = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+          html += `
+            <div class="review-item">
+              <div class="review-header">
+                <span class="review-name">${review.name}</span>
+                <span class="review-stars">${starsStr}</span>
+              </div>
+              <div class="review-text">${review.text}</div>
+              <div class="review-date">${review.date}</div>
+            </div>
+          `;
+        });
+        container.innerHTML = html;
+      })
+      .catch(error => {
+        container.innerHTML = `<div class="no-reviews"><span class="icon">⚠️</span><p>حدث خطأ في تحميل الآراء</p></div>`;
+        console.error(error);
+      });
+  }
+
+  // ===== TOGGLE MENU =====
+  function toggleMenu(){
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+
+  // ===== NAVBAR SCROLL =====
+  window.addEventListener('scroll', function(){
+    const navbar = document.getElementById('navbar');
+    const backTop = document.getElementById('backTop');
+    if(window.scrollY > 50){
+      navbar.classList.add('scrolled');
+      backTop.classList.add('visible');
+    } else {
+      navbar.classList.remove('scrolled');
+      backTop.classList.remove('visible');
+    }
+  });
+
+  // ===== SLIDER =====
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.slider-slide');
+  const track = document.getElementById('sliderTrack');
+  function goToSlide(index){
+    currentSlide = (index + slides.length) % slides.length;
+    track.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
+  }
+  function nextSlide(){goToSlide(currentSlide + 1);}
+  function prevSlide(){goToSlide(currentSlide - 1);}
+  setInterval(nextSlide, 5000);
+
+  // ===== CLOSE MENU ON LINK CLICK =====
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('navLinks').classList.remove('open');
+    });
+  });
+
+  // ===== LOAD REVIEWS ON PAGE LOAD =====
+  document.addEventListener('DOMContentLoaded', function() {
+    loadReviews();
+  });
+
+  // ===== PLACEHOLDER FUNCTIONS =====
+  function openNotebookShop(){ alert('📒 قريباً... قريباً هتوصلكم المنتجات 🌸'); }
+  function openStickerShop(){ alert('✨ قريباً... قريباً هتوصلكم المنتجات 🌸'); }
+  function openPlannerShop(){ alert('📅 قريباً... قريباً هتوصلكم المنتجات 🌸'); }
+</script>
 
 </body>
 </html>
