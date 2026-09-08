@@ -1528,8 +1528,9 @@
     msg += `\n💰 السعر الكلي: ${total} ج.م`;
     msg += `\n\n🌹 شكراً لثقتك في 𝒩𝑒𝓇𝑜𝓋𝒶 ♡`;
 
-    // 🔥 فتح الرابط مباشرة في نفس التبويب (مضمون)
-    window.location.href = `https://m.me/${FACEBOOK_PAGE_ID}?text=${encodeURIComponent(msg)}`;
+    // 🔥 فتح الماسنجر في تبويب جديد مع الرسالة في صندوق الكتابة
+    const fbUrl = `https://m.me/${FACEBOOK_PAGE_ID}?text=${encodeURIComponent(msg)}`;
+    window.open(fbUrl, '_blank');
 
     cart = [];
     updateCartUI();
