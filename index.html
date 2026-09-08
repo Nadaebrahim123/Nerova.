@@ -47,6 +47,7 @@
   a{text-decoration:none;color:inherit;}
   img{max-width:100%;display:block;}
 
+  /* ===== NAVBAR ===== */
   .navbar{
     position:sticky;
     top:0;
@@ -123,6 +124,7 @@
   }
   .hamburger:hover{background:rgba(232,127,168,0.1);}
 
+  /* ===== HERO ===== */
   .hero{
     min-height:80vh;
     display:flex;
@@ -256,6 +258,7 @@
     50%{transform:translateY(-55%) scale(1.02);}
   }
 
+  /* ===== SECTION ===== */
   section{padding:clamp(40px, 6%, 80px) 5%;position:relative;}
   .section-header{
     text-align:center;
@@ -281,6 +284,7 @@
     margin:0 auto;
   }
 
+  /* ===== CATEGORY GRID ===== */
   .categories-grid{
     display:grid;
     grid-template-columns:repeat(auto-fit, minmax(clamp(130px, 17vw, 200px), 1fr));
@@ -393,6 +397,7 @@
     transform:translateY(0);
   }
 
+  /* ===== PRODUCTS DISPLAY ===== */
   .products-display{
     display:none;
     animation:fadeInUp 0.5s ease;
@@ -538,6 +543,7 @@
   .badge-best{background:var(--accent);color:var(--dark);}
   .badge-popular{background:#7FA6B0;color:var(--white);}
 
+  /* ===== CART BUTTON ===== */
   .cart-btn{
     position:fixed;
     bottom:clamp(80px, 10vh, 100px);
@@ -579,6 +585,7 @@
   }
   .cart-badge.hidden{display:none;}
 
+  /* ===== CART MODAL ===== */
   .cart-modal{
     position:fixed;
     inset:0;
@@ -752,6 +759,7 @@
   }
   .cart-actions .close-cart-btn:hover{background:rgba(43,43,51,0.1);}
 
+  /* ===== REVIEW ===== */
   .review-section{padding:clamp(30px, 5vw, 60px) 5%;}
   .review-card{
     max-width:700px;
@@ -867,6 +875,7 @@
     box-shadow:0 10px 30px rgba(232,127,168,0.3);
   }
 
+  /* ===== ABOUT ===== */
   .about-grid{
     display:grid;
     grid-template-columns:repeat(auto-fit, minmax(clamp(180px, 25vw, 280px), 1fr));
@@ -887,6 +896,7 @@
   .about-item h3{margin:8px 0;font-weight:700;font-size:clamp(0.95rem, 1.2vw, 1.1rem);}
   .about-item p{color:rgba(43,43,51,0.6);line-height:1.6;font-size:clamp(0.8rem, 0.9vw, 0.9rem);}
 
+  /* ===== CONNECT ===== */
   .connect-section{padding:clamp(30px, 5vw, 60px) 5%;}
   .connect-card{
     max-width:600px;
@@ -938,6 +948,7 @@
     box-shadow:0 8px 25px rgba(0,0,0,0.15);
   }
 
+  /* ===== FOOTER ===== */
   .footer{
     padding:clamp(30px, 4vw, 50px) 5% clamp(20px, 2vw, 30px);
     border-top:1px solid rgba(43,43,51,0.06);
@@ -955,6 +966,7 @@
     color:var(--primary-dark);
   }
 
+  /* ===== BACK TO TOP ===== */
   .back-top{
     position:fixed;
     bottom:clamp(16px, 2vw, 30px);
@@ -983,6 +995,7 @@
   }
   .back-top:hover{transform:translateY(-3px);box-shadow:0 15px 40px rgba(232,127,168,0.35);}
 
+  /* ===== REVIEWS DISPLAY ===== */
   .reviews-header{
     display:flex;
     align-items:center;
@@ -1034,6 +1047,7 @@
   .no-reviews{text-align:center;padding:clamp(16px, 2vw, 30px);color:rgba(43,43,51,0.5);}
   .no-reviews .icon{font-size:clamp(1.8rem, 2.5vw, 2rem);display:block;margin-bottom:8px;}
 
+  /* ===== RESPONSIVE ===== */
   @media(max-width:1024px){
     .hero-image{width:clamp(180px, 30vw, 280px);height:clamp(180px, 30vw, 280px);font-size:clamp(3.5rem, 8vw, 6rem);}
     .hero-title{font-size:clamp(2rem, 5vw, 3rem);}
@@ -1337,7 +1351,7 @@
     <h2>Let's Stay Connected</h2>
     <p>Thank you for visiting 𝒩𝑒𝓇𝑜𝓋𝒶 ♡. We can't wait to be part of your next idea, plan, or story.</p>
     <div class="social-links">
-      <a href="https://m.me/61591859690088" class="messenger"><i class="fab fa-facebook-messenger"></i> <span>Messenger</span></a>
+      <a href="https://m.me/NerovaStationery" class="messenger"><i class="fab fa-facebook-messenger"></i> <span>Messenger</span></a>
       <a href="https://chat.whatsapp.com/Gdnfc5x3JYJHm4hoKU1CoA" class="whatsapp"><i class="fab fa-whatsapp"></i> <span>WhatsApp</span></a>
       <a href="https://www.facebook.com/share/1DujamZxFt/" class="facebook"><i class="fab fa-facebook"></i> <span>Facebook</span></a>
       <a href="https://www.instagram.com/shop.nerova" class="instagram"><i class="fab fa-instagram"></i> <span>Instagram</span></a>
@@ -1493,7 +1507,7 @@
   // =============================================
   // 📦 CHECKOUT - Facebook Messenger
   // =============================================
-  const FACEBOOK_PAGE_ID = "61591859690088";
+  const FACEBOOK_PAGE_ID = "NerovaStationery";
 
   function checkout() {
     if (cart.length === 0) {
