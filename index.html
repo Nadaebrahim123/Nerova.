@@ -1738,7 +1738,7 @@
       <div class="category-card" onclick="showCategory('planners')">
         <div class="icon-wrapper"><span class="icon">📅</span></div>
         <h3>Planners</h3>
-        <div class="count"><span>0</span> منتج</div>
+        <div class="count"><span>1</span> منتج</div>
         <span class="arrow-icon"><i class="fas fa-arrow-left"></i></span>
       </div>
       <div class="category-card" onclick="showCategory('stickers')">
@@ -1954,7 +1954,7 @@
     const database = firebase.database();
 
     // =============================================
-    // 📦 CATEGORY DATA - Updated Notebooks
+    // 📦 CATEGORY DATA
     // =============================================
     const categoryData = {
       notebooks: {
@@ -1990,7 +1990,18 @@
           badgeClass: 'badge-best'
         }]
       },
-      planners: { title: 'Planners', icon: '📅', products: [] },
+      planners: {
+        title: 'Planners',
+        icon: '📅',
+        products: [{
+          name: 'ميني نوت',
+          desc: 'ميني نوت تدون فيها أفكارك ومهامك. بألوان جميلة 91 صفحه',
+          price: 45,
+          img: 'https://i.postimg.cc/CKbqwsJZ/file-000000004484822fac9d72c6da40d42c.png',
+          badge: 'جديد ✨',
+          badgeClass: 'badge-new'
+        }]
+      },
       stickers: { title: 'Stickers', icon: '✨', products: [] },
       stickynotes: {
         title: 'Sticky Notes',
