@@ -964,30 +964,6 @@
     box-shadow:var(--shadow);
     border:1px solid rgba(255,255,255,0.2);
   }
-  .connect-card .share-btns{
-    display:flex;
-    justify-content:center;
-    gap:12px;
-    margin-top:16px;
-    flex-wrap:wrap;
-  }
-  .connect-card .share-btns a{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    padding:10px 20px;
-    border-radius:30px;
-    font-weight:700;
-    font-size:0.85rem;
-    transition:var(--transition);
-    color:var(--white);
-    border:none;
-  }
-  .connect-card .share-btns a:hover{transform:translateY(-3px);}
-  .share-fb{background:#1877F2;}
-  .share-wa{background:#25D366;}
-  .share-tw{background:#000;}
-  .share-copy{background:var(--primary);}
 
   .connect-card h2{
     font-family:'Playfair Display',serif;
@@ -1422,13 +1398,6 @@
     <div style="font-size:clamp(2.5rem, 4vw, 3rem);margin-bottom:8px;">🤍</div>
     <h2>Let's Stay Connected</h2>
     <p>Thank you for visiting 𝒩𝑒𝓇𝑜𝓋𝒶 ♡. We can't wait to be part of your next idea, plan, or story.</p>
-    
-    <div class="share-btns">
-      <a href="#" class="share-fb" onclick="shareOnFB()"><i class="fab fa-facebook"></i> شارك</a>
-      <a href="#" class="share-wa" onclick="shareOnWA()"><i class="fab fa-whatsapp"></i> شارك</a>
-      <a href="#" class="share-tw" onclick="shareOnTwitter()"><i class="fab fa-x-twitter"></i> شارك</a>
-      <a href="#" class="share-copy" onclick="copyLink()"><i class="fas fa-copy"></i> نسخ الرابط</a>
-    </div>
 
     <div class="social-links">
       <a href="https://m.me/NerovaStationery" class="messenger"><i class="fab fa-facebook-messenger"></i> <span>Messenger</span></a>
@@ -1454,7 +1423,7 @@
 <div class="success-modal" id="successModal" onclick="closeSuccess(event)">
   <div class="success-box" onclick="event.stopPropagation()">
     <span class="icon">🎉</span>
-    <h3>تم إرسال طلبك بنجاح! 💕</h3>
+    <h3>طلبك جاهز! 💕</h3>
     <p>شكراً لثقتك في 𝒩𝑒𝓇𝑜𝓋𝒶 ♡<br>سنقوم بالتواصل معك قريباً جداً 🌸</p>
     <button class="done-btn" onclick="closeSuccess()">تمام ✨</button>
   </div>
@@ -1571,7 +1540,7 @@
   function updateCartUI() {
     const badge = document.getElementById('cartBadge');
     const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
-    
+
     if (totalItems > 0) {
       badge.textContent = totalItems;
       badge.classList.remove('hidden');
@@ -1657,7 +1626,7 @@
   }
 
   // =============================================
-  // 📦 CHECKOUT - Facebook Messenger
+  // 📦 CHECKOUT - Facebook Messenger (نسخ الأوردر + فتح الماسنجر)
   // =============================================
   const FACEBOOK_PAGE_ID = "NerovaStationery";
 
@@ -1680,14 +1649,40 @@
     msg += `\n💰 السعر الكلي: ${total} ج.م`;
     msg += `\n\n🌹 شكراً لثقتك في 𝒩𝑒𝓇𝑜𝓋𝒶 ♡`;
 
-    const fbUrl = `https://m.me/${FACEBOOK_PAGE_ID}?text=${encodeURIComponent(msg)}`;
-    window.open(fbUrl, '_blank');
+    // بعد النسخ/المحاولة: نفتح الماسنجر ونظهر رسالة النجاح
+    const finishCheckout = (copied) => {
+      window.open(`https://m.me/${FACEBOOK_PAGE_ID}`, '_blank');
 
-    cart = [];
-    updateCartUI();
-    closeCart();
-    
-    document.getElementById('successModal').classList.add('active');
+      cart = [];
+      updateCartUI();
+      closeCart();
+
+      const successBox = document.querySelector('#successModal .success-box p');
+      successBox.innerHTML = copied
+        ? 'تم نسخ طلبك ✅<br>افتحي المحادثة في الماسنجر و<strong>الصقي الرسالة</strong> ودوسي إرسال 🌸'
+        : 'افتحي الماسنجر واكتبي طلبك بشكل مختصر ودوسي إرسال 🌸';
+      document.getElementById('successModal').classList.add('active');
+    };
+
+    // نسخ الأوردر في الحافظة
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(msg)
+        .then(() => finishCheckout(true))
+        .catch(() => finishCheckout(false));
+    } else {
+      // للموبايلات القديمة
+      const input = document.createElement('textarea');
+      input.value = msg;
+      input.style.position = 'fixed';
+      input.style.opacity = '0';
+      document.body.appendChild(input);
+      input.focus();
+      input.select();
+      let copied = false;
+      try { copied = document.execCommand('copy'); } catch (err) { copied = false; }
+      document.body.removeChild(input);
+      finishCheckout(copied);
+    }
   }
 
   // =============================================
@@ -1726,7 +1721,7 @@
     if (!data) return;
     const container = document.getElementById('categoryProducts');
     const display = document.getElementById('productsDisplay');
-    
+
     // رسالة بأن الفئة فارغة
     if (data.products.length === 0) {
       container.innerHTML = `
@@ -1853,32 +1848,6 @@
   }
 
   // =============================================
-  // 📱 SHARE FUNCTIONS
-  // =============================================
-  function shareOnFB() {
-    window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank');
-  }
-  function shareOnWA() {
-    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent('𝒩𝑒𝓇𝑜𝓋𝒶 ♡ - شوفوا المنتجات الجميلة دي! 🌸 ' + window.location.href)}`, '_blank');
-  }
-  function shareOnTwitter() {
-    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent('𝒩𝑒𝓇𝑜𝓋𝒶 ♡ - شوفوا المنتجات الجميلة دي! 🌸')}&url=${encodeURIComponent(window.location.href)}`, '_blank');
-  }
-  function copyLink() {
-    navigator.clipboard.writeText(window.location.href).then(() => {
-      alert('✅ تم نسخ الرابط! شاركيه مع أصحابك 💕');
-    }).catch(() => {
-      const input = document.createElement('input');
-      input.value = window.location.href;
-      document.body.appendChild(input);
-      input.select();
-      document.execCommand('copy');
-      document.body.removeChild(input);
-      alert('✅ تم نسخ الرابط! شاركيه مع أصحابك 💕');
-    });
-  }
-
-  // =============================================
   // 📱 MENU TOGGLE
   // =============================================
   function toggleMenu() {
@@ -1917,4 +1886,4 @@
 </script>
 
 </body>
- </html>
+</html>
