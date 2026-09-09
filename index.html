@@ -1360,7 +1360,7 @@
     <div class="category-card" onclick="showCategory('organizers')">
       <div class="icon-wrapper"><span class="icon">📂</span></div>
       <h3>Organizers</h3>
-      <div class="count"><span>0</span> منتج</div>
+      <div class="count"><span>1</span> منتج</div>
       <span class="arrow-icon"><i class="fas fa-arrow-left"></i></span>
     </div>
     <div class="category-card" onclick="showCategory('packages')">
@@ -1599,7 +1599,20 @@
         }
       ]
     },
-    organizers: { title: 'Organizers', icon: '📂', products: [] },
+    organizers: {
+      title: 'Organizers',
+      icon: '📂',
+      products: [
+        {
+          name: 'منظم للدفاتر والأوراق',
+          desc: 'منظم أنيق للدفاتر والأوراق، يحافظ على ترتيب مكتبك ويمنحك مساحة منظمة لكل ما تحتاجه.',
+          price: 95,
+          img: 'https://i.postimg.cc/7YYK5FrB/file-000000004738820ead8a0e20e2a1d6fe.png',
+          badge: '📂 جديد',
+          badgeClass: 'badge-new'
+        }
+      ]
+    },
     packages: { title: 'Packages', icon: '📦', products: [] },
     fineliners: { title: 'Fineliners', icon: '🖊️', products: [] },
     ballpoint: { title: 'Ballpoint Pens', icon: '✒️', products: [] },
@@ -1735,7 +1748,7 @@
   }
 
   // =============================================
-  // 📦 CHECKOUT - Facebook Messenger
+  // 📦 CHECKOUT - Facebook Messenger (مباشر)
   // =============================================
   const FACEBOOK_PAGE_ID = "NerovaStationery";
 
@@ -1745,10 +1758,7 @@
       return;
     }
 
-    const name = prompt('👤 من فضلك اكتب اسمك الأول:');
-    if (!name) return;
-
-    let msg = `📦 طلب جديد من ${name}\n\n`;
+    let msg = `📦 طلب جديد!\n\n`;
     let total = 0;
     cart.forEach(item => {
       const itemTotal = item.price * item.qty;
@@ -1765,7 +1775,7 @@
     updateCartUI();
     closeCart();
     
-    document.getElementById('successModal').classList.add('active');
+    alert('✅ تم إرسال طلبك! سنتواصل معك قريباً 💕');
   }
 
   // =============================================
