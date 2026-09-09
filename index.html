@@ -1738,7 +1738,7 @@
       <div class="category-card" onclick="showCategory('planners')">
         <div class="icon-wrapper"><span class="icon">📅</span></div>
         <h3>Planners</h3>
-        <div class="count"><span>1</span> منتج</div>
+        <div class="count"><span>2</span> منتج</div>
         <span class="arrow-icon"><i class="fas fa-arrow-left"></i></span>
       </div>
       <div class="category-card" onclick="showCategory('stickers')">
@@ -1774,7 +1774,7 @@
       <div class="category-card" onclick="showCategory('ballpoint')">
         <div class="icon-wrapper"><span class="icon">✒️</span></div>
         <h3>Ballpoint Pens</h3>
-        <div class="count"><span>0</span> منتج</div>
+        <div class="count"><span>1</span> منتج</div>
         <span class="arrow-icon"><i class="fas fa-arrow-left"></i></span>
       </div>
       <div class="category-card" onclick="showCategory('highlighters')">
@@ -2007,6 +2007,12 @@
           img: 'https://i.postimg.cc/CKbqwsJZ/file-000000004484822fac9d72c6da40d42c.png',
           badge: 'جديد ✨',
           badgeClass: 'badge-new'
+        }, {
+          name: 'نوته بني كيوتي',
+          desc: 'نوته بني كيوتي بتصميم خاص من Nerova عمليه',
+          img: 'https://i.postimg.cc/XJdh4myX/file-000000008a78824680d5748204ca754b.png',
+          badge: '🤎 تصميم Nerova',
+          badgeClass: 'badge-new'
         }]
       },
       stickers: { title: 'Stickers', icon: '✨', products: [] },
@@ -2064,7 +2070,18 @@
       },
       packages: { title: 'Packages', icon: '📦', products: [] },
       fineliners: { title: 'Fineliners', icon: '🖊️', products: [] },
-      ballpoint: { title: 'Ballpoint Pens', icon: '✒️', products: [] },
+      ballpoint: {
+        title: 'Ballpoint Pens',
+        icon: '✒️',
+        products: [{
+          name: 'قلم سنون ٧ ملي',
+          desc: 'قلم سنون مقاس ٧ ملي جميع الألوان',
+          price: 50,
+          img: 'https://i.postimg.cc/xCvsWmW1/5841321252923052233-121.jpg',
+          badge: '✒️ جديد',
+          badgeClass: 'badge-new'
+        }]
+      },
       highlighters: {
         title: 'Highlighters',
         icon: '🟡',
@@ -2310,10 +2327,10 @@
             <span class="product-icon">${data.icon}</span>
             <h3>${p.name}</h3>
             <p>${p.desc}</p>
-            <div class="price">${p.price} ج.م</div>
-            <button class="add-to-cart" onclick="addToCart('${p.name}', ${p.price}, '${p.img}', '${data.icon}')">
+            ${p.price ? `<div class="price">${p.price} ج.م</div>` : ''}
+            ${p.price ? `<button class="add-to-cart" onclick="addToCart('${p.name}', ${p.price}, '${p.img}', '${data.icon}')">
               <i class="fas fa-plus"></i> أضف للسلة
-            </button>
+            </button>` : ''}
           </div>
         `).join('');
 
