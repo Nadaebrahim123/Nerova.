@@ -1207,6 +1207,7 @@
     .category-card .arrow-icon{display:none;}
   }
 </style>
+<base target="_blank">
 </head>
 <body>
 
@@ -1256,7 +1257,7 @@
     <div class="category-card" onclick="showCategory('notebooks')">
       <div class="icon-wrapper"><span class="icon">📓</span></div>
       <h3>Notebooks</h3>
-      <div class="count"><span>0</span> منتج</div>
+      <div class="count"><span>2</span> منتج</div>
       <span class="arrow-icon"><i class="fas fa-arrow-left"></i></span>
     </div>
     <div class="category-card" onclick="showCategory('planners')">
@@ -1274,7 +1275,7 @@
     <div class="category-card" onclick="showCategory('stickynotes')">
       <div class="icon-wrapper"><span class="icon">📝</span></div>
       <h3>Sticky Notes</h3>
-      <div class="count"><span>0</span> منتج</div>
+      <div class="count"><span>1</span> منتج</div>
       <span class="arrow-icon"><i class="fas fa-arrow-left"></i></span>
     </div>
     <div class="category-card" onclick="showCategory('organizers')">
@@ -1304,7 +1305,7 @@
     <div class="category-card" onclick="showCategory('highlighters')">
       <div class="icon-wrapper"><span class="icon">🟡</span></div>
       <h3>Highlighters</h3>
-      <div class="count"><span>0</span> منتج</div>
+      <div class="count"><span>1</span> منتج</div>
       <span class="arrow-icon"><i class="fas fa-arrow-left"></i></span>
     </div>
   </div>
@@ -1482,15 +1483,62 @@
   // 📦 CATEGORY DATA - EMPTY (Ready for real products)
   // =============================================
   const categoryData = {
-    notebooks: { title: 'Notebooks', icon: '📓', products: [] },
+    notebooks: {
+      title: 'Notebooks',
+      icon: '📓',
+      products: [
+        {
+          name: 'دفتر A4',
+          desc: 'دفتر A4 - 40 ورقة، خفيف وسهل الحمل 🎒 بـ 35 ج.م والـ 4 دفاتر بـ 110 ج.م بدل 140 ✨',
+          price: 35,
+          img: 'https://i.postimg.cc/J0LL5TxY/5841321252923051911.jpg',
+          badge: 'عرض خاص 🔥',
+          badgeClass: 'badge-sale'
+        },
+        {
+          name: 'دفتر 𝒩𝑒𝓇𝑜𝓋𝒶 ♡',
+          desc: 'دفتر 𝒩𝑒𝓇𝑜𝓋𝒶 بتصميمه الخاص والأنيق 🤍 الكوشيه: 60 ورقة، غلاف خفيف سهل الحمل بـ 60 ج.م 💫 الهارد كافر A5: 80 ورقة بـ 90 ج.م ✨',
+          price: 60,
+          img: 'https://i.postimg.cc/Y9xXTbkX/5841321252923051919.jpg',
+          badge: 'تصميم 𝒩𝑒𝓇𝑜𝓋𝒶 ♡',
+          badgeClass: 'badge-best'
+        }
+      ]
+    },
     planners: { title: 'Planners', icon: '📅', products: [] },
     stickers: { title: 'Stickers', icon: '✨', products: [] },
-    stickynotes: { title: 'Sticky Notes', icon: '📝', products: [] },
+    stickynotes: {
+      title: 'Sticky Notes',
+      icon: '📝',
+      products: [
+        {
+          name: 'Sticky Notes 75×75',
+          desc: 'استيكي نوت مقاس 75×75 - 50 ورقة بتصميمات مميزة ✨',
+          price: 35,
+          img: 'https://i.postimg.cc/1Xj8t1sG/5841321252923051872-(1).jpg',
+          badge: 'جديد ✨',
+          badgeClass: 'badge-new'
+        }
+      ]
+    },
     organizers: { title: 'Organizers', icon: '📂', products: [] },
     packages: { title: 'Packages', icon: '📦', products: [] },
     fineliners: { title: 'Fineliners', icon: '🖊️', products: [] },
     ballpoint: { title: 'Ballpoint Pens', icon: '✒️', products: [] },
-    highlighters: { title: 'Highlighters', icon: '🟡', products: [] }
+    highlighters: {
+      title: 'Highlighters',
+      icon: '🟡',
+      products: [
+        {
+          name: 'هايلايتر جميع الألوان',
+          desc: 'هايلايتر جميع الألوان اللي نفسك فيها! 🌈 القلم بـ 20 ج.م والـ 6 أقلام بـ 100 ج.م بدل 120 ✨',
+          price: 20,
+          img: 'https://i.postimg.cc/t4Xgjgh1/5841321252923051912.jpg',
+          badge: 'عرض خاص 🔥',
+          badgeClass: 'badge-sale'
+        }
+      ]
+    }
   };
 
   // =============================================
@@ -1869,4 +1917,4 @@
 </script>
 
 </body>
-</html>
+ </html>
