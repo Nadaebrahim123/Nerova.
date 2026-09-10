@@ -107,7 +107,7 @@
     .product-card { background:rgba(255,255,255,0.6); backdrop-filter:blur(8px); border-radius:clamp(14px,1.5vw,16px); padding:clamp(14px,1.5vw,20px) clamp(12px,1.2vw,16px); box-shadow:0 4px 16px rgba(43,43,51,0.04); transition:var(--transition); border:1px solid rgba(255,255,255,0.2); text-align:center; display:flex; flex-direction:column; }
     .product-card:hover { transform:translateY(-4px); box-shadow:0 12px 32px rgba(43,43,51,0.08); background:rgba(255,255,255,0.8); }
     .product-img-wrapper { position:relative; cursor:pointer; overflow:hidden; border-radius:12px; margin-bottom:10px; }
-    .product-img-wrapper .product-img { width:100%; height:clamp(130px,20vw,180px); object-fit:cover; transition:var(--transition); }
+    .product-img-wrapper .product-img { width:100%; height:clamp(180px,25vw,240px); object-fit:cover; transition:var(--transition); }
     .product-img-wrapper:hover .product-img { transform:scale(1.05); }
     .product-img-wrapper .zoom-icon { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:1.8rem; color:white; background:rgba(0,0,0,0.4); backdrop-filter:blur(5px); width:50px; height:50px; border-radius:50%; display:flex; align-items:center; justify-content:center; opacity:0; transition:var(--transition); pointer-events:none; }
     .product-img-wrapper:hover .zoom-icon { opacity:1; }
@@ -161,42 +161,12 @@
     .customer-form .confirm-btn:hover { background:var(--primary-dark); }
 
     /* ===== LIGHTBOX ===== */
-    .lightbox-overlay { position:fixed; inset:0; z-index:10001; background:rgba(0,0,0,0.85); backdrop-filter:blur(10px); display:none; align-items:center; justify-content:center; padding:30px; cursor:pointer; }
+    .lightbox-overlay { position:fixed; inset:0; z-index:10001; background:rgba(0,0,0,0.9); backdrop-filter:blur(10px); display:none; align-items:center; justify-content:center; padding:20px; cursor:pointer; overflow:hidden; }
     .lightbox-overlay.active { display:flex; }
-    .lightbox-overlay img { max-width:90vw; max-height:85vh; object-fit:contain; border-radius:12px; cursor:default; }
+    .lightbox-overlay img { max-width:95vw; max-height:90vh; object-fit:contain; border-radius:12px; cursor:zoom-in; transition:transform 0.3s ease; }
+    .lightbox-overlay img.zoomed { transform:scale(2); cursor:zoom-out; }
     .lightbox-close { position:fixed; top:20px; right:20px; width:50px; height:50px; border-radius:50%; background:rgba(255,255,255,0.15); backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,0.2); color:white; font-size:1.8rem; cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:10002; }
     .lightbox-close:hover { background:rgba(255,255,255,0.25); transform:rotate(90deg); }
-
-    /* ===== REVIEW ===== */
-    .review-section { padding:clamp(30px,5vw,60px) 5%; }
-    .review-card { max-width:700px; margin:0 auto; background:rgba(255,255,255,0.6); backdrop-filter:blur(10px); border-radius:var(--radius); padding:clamp(24px,4vw,50px) clamp(16px,3vw,40px); border:1px solid rgba(255,255,255,0.2); box-shadow:var(--shadow); text-align:center; }
-    .happy-girl { font-size:clamp(3rem,6vw,4rem); display:block; margin-bottom:4px; animation:floatHappy 3s ease-in-out infinite; }
-    @keyframes floatHappy { 0%,100%{transform:translateY(0) rotate(-3deg);} 50%{transform:translateY(-6px) rotate(3deg);} }
-    .review-card h3 { font-family:'Playfair Display',serif; font-size:clamp(1.4rem,2.5vw,1.8rem); margin-bottom:4px; }
-    .review-card .sub { color:rgba(43,43,51,0.6); font-size:clamp(0.8rem,1vw,0.95rem); margin-bottom:16px; line-height:1.7; }
-    .encourage-box { background:rgba(232,127,168,0.08); border:2px dashed var(--primary); border-radius:16px; padding:clamp(10px,1.5vw,14px) clamp(14px,2vw,20px); margin-bottom:20px; display:flex; align-items:center; justify-content:center; gap:8px; font-weight:600; font-size:clamp(0.85rem,1vw,1rem); flex-wrap:wrap; }
-    .star-rating { display:flex; justify-content:center; gap:6px; margin-bottom:16px; direction:ltr; }
-    .star-rating .star { font-size:clamp(1.6rem,2.5vw,2rem); cursor:pointer; color:#ddd; }
-    .star-rating .star.active { color:var(--accent); }
-    .star-rating .star:hover { transform:scale(1.1); }
-    .form-group { margin-bottom:14px; text-align:right; }
-    .form-group label { display:block; font-weight:600; font-size:clamp(0.8rem,0.9vw,0.9rem); margin-bottom:4px; }
-    .form-group input, .form-group textarea { width:100%; padding:clamp(10px,1.2vw,12px) clamp(12px,1.5vw,16px); border:1px solid rgba(43,43,51,0.08); border-radius:12px; font-family:'Cairo',sans-serif; font-size:clamp(0.85rem,1vw,0.95rem); background:rgba(255,255,255,0.5); outline:none; }
-    .form-group input:focus, .form-group textarea:focus { border-color:var(--primary); background:rgba(255,255,255,0.8); box-shadow:0 0 0 3px rgba(232,127,168,0.08); }
-    .form-group textarea { height:clamp(80px,12vw,100px); resize:vertical; }
-    .submit-review { width:100%; padding:clamp(12px,1.2vw,14px); background:var(--primary); color:var(--white); border:none; border-radius:12px; font-weight:700; font-size:clamp(0.9rem,1vw,1rem); font-family:'Cairo',sans-serif; cursor:pointer; }
-    .submit-review:hover { background:var(--primary-dark); transform:translateY(-2px); box-shadow:0 10px 30px rgba(232,127,168,0.3); }
-    .reviews-header { display:flex; align-items:center; justify-content:center; gap:10px; margin-top:clamp(20px,3vw,35px); padding-top:clamp(16px,2vw,25px); border-top:2px dashed rgba(43,43,51,0.06); font-weight:700; font-size:clamp(0.9rem,1.1vw,1.1rem); }
-    .reviews-display { margin-top:12px; max-height:400px; overflow-y:auto; padding-right:8px; text-align:right; }
-    .review-item { background:rgba(255,255,255,0.5); backdrop-filter:blur(5px); border-radius:16px; padding:clamp(12px,1.5vw,18px) clamp(14px,1.5vw,20px); margin-bottom:10px; border:1px solid rgba(255,255,255,0.2); }
-    .review-item .review-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:4px; flex-wrap:wrap; gap:6px; }
-    .review-item .review-name { font-weight:700; font-size:clamp(0.85rem,1vw,0.95rem); }
-    .review-item .review-stars { color:var(--accent); font-size:clamp(0.8rem,0.9vw,0.9rem); }
-    .review-item .review-text { font-size:clamp(0.8rem,0.9vw,0.92rem); color:rgba(43,43,51,0.7); line-height:1.6; }
-    .review-item .review-date { font-size:clamp(0.65rem,0.7vw,0.75rem); color:rgba(43,43,51,0.4); margin-top:3px; }
-    .loading-reviews { text-align:center; padding:16px; color:rgba(43,43,51,0.5); }
-    .no-reviews { text-align:center; padding:clamp(16px,2vw,30px); color:rgba(43,43,51,0.5); }
-    .no-reviews .icon { font-size:clamp(1.8rem,2.5vw,2rem); display:block; margin-bottom:8px; }
 
     /* ===== ABOUT ===== */
     .about-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(clamp(180px,25vw,280px),1fr)); gap:clamp(14px,2vw,25px); text-align:center; }
@@ -248,10 +218,18 @@
       .hero-image { width:clamp(140px,30vw,200px); height:clamp(140px,30vw,200px); font-size:clamp(3rem,8vw,4.5rem); }
       .categories-grid { grid-template-columns:repeat(auto-fit, minmax(clamp(100px,28vw,140px),1fr)); gap:12px; }
       .category-card .icon-wrapper { width:clamp(46px,12vw,56px); height:clamp(46px,12vw,56px); font-size:clamp(1.5rem,4.5vw,1.9rem); }
-      .products-grid { grid-template-columns:repeat(auto-fit, minmax(clamp(130px,40vw,180px),1fr)); gap:12px; }
+      .products-grid { grid-template-columns:repeat(auto-fit, minmax(clamp(170px, 45vw, 240px),1fr)); gap:14px; }
+      .product-img-wrapper .product-img { height: clamp(200px, 55vw, 280px); }
       .about-grid { grid-template-columns:1fr; }
       .social-links a span { display:none; }
       .footer { flex-direction:column; text-align:center; }
+    }
+
+    @media(max-width:480px) {
+      .products-grid { grid-template-columns: 1fr; gap: 16px; }
+      .product-img-wrapper .product-img { height: clamp(280px, 85vw, 400px); }
+      .product-card h3 { font-size: 1.05rem; }
+      .product-card p { font-size: 0.85rem; }
     }
   </style>
 </head>
@@ -319,7 +297,6 @@
         </div>
       </div>
 
-      <!-- ✅ فورم مبسّط: الاسم + ملاحظات فقط -->
       <div id="customerInfo" class="customer-form" style="display:none;margin-top:14px;">
         <div style="text-align:right;margin-bottom:10px;">
           <label style="font-weight:700;font-size:0.9rem;display:block;margin-bottom:4px;">👤 الاسم</label>
@@ -338,33 +315,6 @@
       </div>
     </div>
   </div>
-
-  <!-- ===== REVIEW SECTION ===== -->
-  <section class="review-section" id="review">
-    <div class="review-card">
-      <span class="happy-girl">🥰</span>
-      <h3>شاركنا رأيك 💕</h3>
-      <p class="sub">رأيك يهمنا جداً ويساعدنا نكون أفضل 🌸</p>
-      <div class="encourage-box">
-        <span>📝</span><span>قولنا إيه رأيك في المنتجات؟</span><span style="font-size:1.2rem;">👇</span>
-      </div>
-      <form id="reviewForm" onsubmit="addReview(event)">
-        <div class="star-rating" id="starRating">
-          <span class="star" data-value="1">★</span>
-          <span class="star" data-value="2">★</span>
-          <span class="star" data-value="3">★</span>
-          <span class="star" data-value="4">★</span>
-          <span class="star" data-value="5">★</span>
-        </div>
-        <input type="hidden" id="ratingValue" value="0">
-        <div class="form-group"><label>👤 اسمك</label><input type="text" id="reviewName" placeholder="اكتب اسمك هنا" required></div>
-        <div class="form-group"><label>📝 رأيك عن المنتجات</label><textarea id="reviewText" placeholder="شاركنا تجربتك... 💕" required></textarea></div>
-        <button type="submit" class="submit-review"><i class="fas fa-paper-plane"></i> إرسال رأيك</button>
-      </form>
-      <div class="reviews-header"><span>💬</span><span>آراء عملائنا</span></div>
-      <div class="reviews-display" id="reviewsDisplay"><div class="loading-reviews">⏳ جاري تحميل الآراء...</div></div>
-    </div>
-  </section>
 
   <!-- ===== ABOUT ===== -->
   <section id="about">
@@ -441,69 +391,71 @@
     // =============================================
     // 📦 CATEGORY DATA
     // =============================================
+    const GH = 'https://raw.githubusercontent.com/Nadaebrahim123/Nerova/main/';
+
     const categoryData = {
       notebooks: {
         title: 'Notebooks', icon: '📓',
         products: [
-          { name: 'دفتر A4 - 40 ورقة', desc: 'دفتر A4 - 40 ورقة، خفيف وسهل الحمل 🎒', price: 30, img: 'https://i.postimg.cc/J0LL5TxY/5841321252923051911.jpg', badge: 'عرض خاص 🔥', badgeClass: 'badge-sale' },
-          { name: 'دفتر A4 - 80 ورقة', desc: 'تصميم خاص ليلي أنيق، تغليف كوشيه، سلك، 80 ورقة.', price: 70, img: 'https://i.postimg.cc/Y9xXTbkX/5841321252923051919.jpg', badge: '🌙 تصميم ليلي', badgeClass: 'badge-new' },
-          { name: 'دفتر A5 - 140 ورقة', desc: 'دفتر A5 مقسم، 140 ورقة بتصميمات جميلة.', price: 90, img: 'https://i.postimg.cc/x8qg4m59/5841321252923052145.jpg', badge: '📖 جديد', badgeClass: 'badge-new' },
-          { name: 'دفتر 𝒩𝑒𝓇𝑜𝓋𝒶 ♡ Hard Cover', desc: 'تصميم خاص ليلي أنيق، تغليف هارد كافر، مقاس A5.', price: 95, img: 'https://i.postimg.cc/Y9xXTbkX/5841321252923051919.jpg', badge: '💫 هارد كافر', badgeClass: 'badge-best' },
-          { name: 'دفتر هارد كافر A4 - 140 ورقة', desc: 'دفاتر هارد كافر ١٤٠ ورقه مقاس A4 متقسمه تكفي معاك مادتين', price: 110, img: 'https://i.postimg.cc/Kzz3thxR/file-00000000d8c881f4b1f32dd1d33bd869.png', badge: '📚 هارد كافر', badgeClass: 'badge-new' }
+          { name: 'دفتر A4 - 40 ورقة', desc: 'دفتر A4 - 40 ورقة، خفيف وسهل الحمل 🎒', price: 30, img: GH + 'file_00000000487c81f58738c605b809d99a.png', badge: 'عرض خاص 🔥', badgeClass: 'badge-sale' },
+          { name: 'دفتر A4 - 80 ورقة', desc: 'تصميم خاص ليلي أنيق، تغليف كوشيه، سلك، 80 ورقة.', price: 70, img: GH + 'AIRetouch_20260909_203417498_1.png', badge: '🌙 تصميم ليلي', badgeClass: 'badge-new' },
+          { name: 'دفتر A5 - 140 ورقة', desc: 'دفتر A5 مقسم، 140 ورقة بتصميمات جميلة.', price: 90, img: GH + 'file_00000000b90c8210829c635c128460e7.png', badge: '📖 جديد', badgeClass: 'badge-new' },
+          { name: 'دفتر 𝒩𝑒𝓇𝑜𝓋𝒶 ♡ Hard Cover', desc: 'تصميم خاص ليلي أنيق، تغليف هارد كافر، مقاس A5.', price: 95, img: GH + 'AIRetouch_20260909_203417498_1.png', badge: '💫 هارد كافر', badgeClass: 'badge-best' },
+          { name: 'دفتر هارد كافر A4 - 140 ورقة', desc: 'دفاتر هارد كافر ١٤٠ ورقه مقاس A4 متقسمه تكفي معاك مادتين', price: 110, img: GH + 'file_00000000d8c881f4b1f32dd1d33bd869.png', badge: '📚 هارد كافر', badgeClass: 'badge-new' }
         ]
       },
       planners: {
         title: 'Planners', icon: '📅',
         products: [
-          { name: 'ميني نوت', desc: 'ميني نوت تدون فيها أفكارك ومهامك. بألوان جميلة 91 صفحه', price: 45, img: 'https://i.postimg.cc/CKbqwsJZ/file-000000004484822fac9d72c6da40d42c.png', badge: 'جديد ✨', badgeClass: 'badge-new' },
-          { name: 'نوته بني كيوتي', desc: 'نوته بني كيوتي ٦٠ ورقه بتصميم خاص من Nerova عمليه', price: 50, img: 'https://i.postimg.cc/XJdh4myX/file-000000008a78824680d5748204ca754b.png', badge: '🤎 تصميم Nerova', badgeClass: 'badge-new' },
-          { name: 'نوته كتكوته', desc: 'تصميم خاص من نيروفا نوته كتكوته 🐥 عمليه ٦٠ صفحه ب٥٠ بس 😊', price: 50, img: 'https://i.postimg.cc/hjhSXMgg/file-000000003e14820abe877e7e70c1e3d2.png', badge: '🐥 كتكوته', badgeClass: 'badge-new' }
+          { name: 'ميني نوت', desc: 'ميني نوت تدون فيها أفكارك ومهامك. بألوان جميلة 91 صفحه', price: 45, img: GH + 'file_000000004484822fac9d72c6da40d42c.png', badge: 'جديد ✨', badgeClass: 'badge-new' },
+          { name: 'نوته بني كيوتي', desc: 'نوته بني كيوتي ٦٠ ورقه بتصميم خاص من Nerova عمليه', price: 50, img: GH + 'file_000000008a78824680d5748204ca754b.png', badge: '🤎 تصميم Nerova', badgeClass: 'badge-new' },
+          { name: 'نوته كتكوته', desc: 'تصميم خاص من نيروفا نوته كتكوته 🐥 عمليه ٦٠ صفحه ب٥٠ بس 😊', price: 50, img: GH + 'file_000000003e14820abe877e7e70c1e3d2.png', badge: '🐥 كتكوته', badgeClass: 'badge-new' }
         ]
       },
       stickers: { title: 'Stickers', icon: '✨', products: [] },
       stickynotes: {
         title: 'Sticky Notes', icon: '📝',
         products: [
-          { name: 'Sticky Notes 75×75', desc: 'استيكي نوت مقاس 75×75 - 50 ورقة بتصميمات مميزة ✨', price: 35, img: 'https://i.postimg.cc/1Xj8t1sG/5841321252923051872-(1).jpg', badge: 'جديد ✨', badgeClass: 'badge-new' }
+          { name: 'Sticky Notes 75×75', desc: 'استيكي نوت مقاس 75×75 - 50 ورقة بتصميمات مميزة ✨', price: 35, img: GH + 'file_00000000a074820e909f8a0dd387f05d.png', badge: 'جديد ✨', badgeClass: 'badge-new' }
         ]
       },
       organizers: {
         title: 'Organizers', icon: '📂',
         products: [
-          { name: 'منظم للدفاتر والأوراق', desc: 'منظم أنيق للدفاتر والأوراق، يحافظ على ترتيب مكتبك.', price: 95, img: 'https://i.postimg.cc/7YYK5FrB/file-000000004738820ead8a0e20e2a1d6fe.png', badge: '📂 جديد', badgeClass: 'badge-new' },
-          { name: 'دوسيه بلاستيك شفاف', desc: 'دوسيه بلاستيك شفاف بأشكال كيوت يحافظ على ورقك', price: 35, img: 'https://i.postimg.cc/6QxhV3md/IMG-20260909-220107-441.jpg', badge: '🌸 كيوت', badgeClass: 'badge-new' },
-          { name: 'منظم بطوط للأقلام', desc: 'منظم بطوط للأقلام وبيدي شكل جميل للمكتب', price: 110, img: 'https://i.postimg.cc/438qWpRg/file-00000000975c8246a905dc21ef4c852a.png', badge: '🦆 بطوط', badgeClass: 'badge-new' },
-          { name: 'منظم أقلام جميع الألوان', desc: 'منظم أقلام جميع الألوان', price: 40, img: 'https://i.postimg.cc/NfLVQJh4/file-00000000e7fc822fa1cba33158457afe.png', badge: '🌈 جديد', badgeClass: 'badge-new' },
-          { name: 'المقلمه العمليه', desc: 'المقلمه العمليه سهل تاخدها معاك في اي مكان وبجميع الاشكال', price: 170, img: 'https://i.postimg.cc/XNxGQJpx/file-0000000052c08246bb2083ff284ca4c1.png', badge: '👜 عمليه', badgeClass: 'badge-new' },
-          { name: 'منظم أقلام وأدوات المكتب', desc: 'منظم للاقلام وكل أدوات المكتب بدرج صغير', price: 180, img: 'https://i.postimg.cc/NMRHzg9d/file-000000000ab081f6a353208aa0e82997.png', badge: '🗄️ بدرج', badgeClass: 'badge-new' }
+          { name: 'منظم للدفاتر والأوراق', desc: 'منظم أنيق للدفاتر والأوراق، يحافظ على ترتيب مكتبك.', price: 95, img: GH + 'file_000000004738820ead8a0e20e2a1d6fe.png', badge: '📂 جديد', badgeClass: 'badge-new' },
+          { name: 'دوسيه بلاستيك شفاف', desc: 'دوسيه بلاستيك شفاف بأشكال كيوت يحافظ على ورقك', price: 35, img: GH + 'IMG_20260909_220107_441.jpg', badge: '🌸 كيوت', badgeClass: 'badge-new' },
+          { name: 'منظم بطوط للأقلام', desc: 'منظم بطوط للأقلام وبيدي شكل جميل للمكتب', price: 110, img: GH + 'file_00000000975c8246a905dc21ef4c852a.png', badge: '🦆 بطوط', badgeClass: 'badge-new' },
+          { name: 'منظم أقلام جميع الألوان', desc: 'منظم أقلام جميع الألوان', price: 40, img: GH + 'file_00000000e7fc822fa1cba33158457afe.png', badge: '🌈 جديد', badgeClass: 'badge-new' },
+          { name: 'المقلمه العمليه', desc: 'المقلمه العمليه سهل تاخدها معاك في اي مكان وبجميع الاشكال', price: 170, img: GH + 'file_0000000052c08246bb2083ff284ca4c1.png', badge: '👜 عمليه', badgeClass: 'badge-new' },
+          { name: 'منظم أقلام وأدوات المكتب', desc: 'منظم للاقلام وكل أدوات المكتب بدرج صغير', price: 180, img: GH + 'file_000000000ab081f6a353208aa0e82997.png', badge: '🗄️ بدرج', badgeClass: 'badge-new' }
         ]
       },
       packages: { title: 'Packages', icon: '📦', products: [] },
       fineliners: {
         title: 'Fineliners', icon: '🖊️',
         products: [
-          { name: 'قلم سنون ٧ ملي', desc: 'قلم سنون مقاس ٧ ملي جميع الألوان', price: 50, img: 'https://i.postimg.cc/cCb08PTf/5841321252923052233-121.jpg', badge: '✒️ جديد', badgeClass: 'badge-new' },
-          { name: 'قلم سنون - الواحد ب٤٠', desc: 'قلم سنون - الواحد ب٤٠ ج.م', price: 40, img: 'https://i.postimg.cc/kXVF9dbV/5841321252923052232-120.jpg', badge: '✒️ جديد', badgeClass: 'badge-new' },
-          { name: 'علبة سنون ٧ ملي', desc: 'علبة سنون ٧ ملي ب١٠ جنيه', price: 10, img: 'https://i.postimg.cc/fTrvGRqV/IMG-20260910-210447-906.jpg', badge: '📦 جديد', badgeClass: 'badge-new' }
+          { name: 'قلم سنون ٧ ملي', desc: 'قلم سنون مقاس ٧ ملي جميع الألوان', price: 50, img: GH + 'IMG_20260910_210457_005.jpg', badge: '✒️ جديد', badgeClass: 'badge-new' },
+          { name: 'قلم سنون - الواحد ب٤٠', desc: 'قلم سنون - الواحد ب٤٠ ج.م', price: 40, img: GH + '5841321252923052232_120.jpg', badge: '✒️ جديد', badgeClass: 'badge-new' },
+          { name: 'علبة سنون ٧ ملي', desc: 'علبة سنون ٧ ملي ب١٠ جنيه', price: 10, img: GH + 'IMG_20260910_210447_906.jpg', badge: '📦 جديد', badgeClass: 'badge-new' }
         ]
       },
       ballpoint: {
         title: 'Ballpoint Pens', icon: '✒️',
         products: [
-          { name: 'أقلام جاف أزرق', desc: 'أقلام جاف ازرق جميع الأشكال - القلم ب٣٠ ج.م', price: 30, img: 'https://i.postimg.cc/zvG7Tbv7/file-00000000872081f9b44746c2241e952d.png', badge: '🖊️ جديد', badgeClass: 'badge-new' },
-          { name: 'أقلام جاف من بينتريست', desc: 'أقلام جاف طالعه من بينتريست - الواحد ب٤٠ ج.م', price: 40, img: 'https://i.postimg.cc/W4P0VFGV/file-0000000015988246ac9b827bbe49b727.png', badge: '📌 بينتريست', badgeClass: 'badge-new' },
-          { name: 'قلم روتو', desc: 'القلم الroto بكل ألوانه - ب١٥ ج.م', price: 15, img: 'https://i.postimg.cc/gjq2vjw4/file-00000000c1008230b5c4091a90ecf9f3.png', badge: '🖊️ روتو', badgeClass: 'badge-new' },
-          { name: 'طقم أقلام جاف', desc: 'الواحد ب١٥ ج.م - ال٣ ألوان ب٤٠ ج.م', price: 15, img: 'https://i.postimg.cc/zXbdXhgM/IMG-20260910-214051-529.jpg', badge: '🖊️ طقم', badgeClass: 'badge-new' },
-          { name: 'أقلام من بينتريست للكتابة على طول', desc: 'أقلام طالعه من بينتريست للكتابه على طول - الواحد ب٣٥ ج.م', price: 35, img: 'https://i.postimg.cc/zf0wkDh1/IMG-20260910-210433-128.jpg', badge: '📌 بينتريست', badgeClass: 'badge-new' },
-          { name: 'قلم جاف أزرق 0.5 مم', desc: 'قلم جاف ازرق 0.5 m ب١٥ ج.م', price: 15, img: 'https://i.postimg.cc/Z520zCds/IMG-20260910-214224-361.jpg', badge: '🖊️ 0.5 مم', badgeClass: 'badge-new' },
-          { name: 'أقلام جاف روتو', desc: 'أقلام جاف روتو عمليه مريحه في الكتابه بجميع الألوان - القلم ب٥ ج.م 💥', price: 5, img: 'https://i.postimg.cc/ryDVM8q7/file-000000008bd8822f89704e4f93f78ad6.png', badge: '💥 روتو', badgeClass: 'badge-sale' }
+          { name: 'أقلام جاف أزرق', desc: 'أقلام جاف ازرق جميع الأشكال - القلم ب٣٠ ج.م', price: 30, img: GH + 'file_00000000872081f9b44746c2241e952d.png', badge: '🖊️ جديد', badgeClass: 'badge-new' },
+          { name: 'أقلام جاف من بينتريست', desc: 'أقلام جاف طالعه من بينتريست - الواحد ب٤٠ ج.م', price: 40, img: GH + 'file_0000000015988246ac9b827bbe49b727.png', badge: '📌 بينتريست', badgeClass: 'badge-new' },
+          { name: 'قلم روتو', desc: 'القلم الroto بكل ألوانه - ب١٥ ج.م', price: 15, img: GH + 'file_00000000c1008230b5c4091a90ecf9f3.png', badge: '🖊️ روتو', badgeClass: 'badge-new' },
+          { name: 'طقم أقلام جاف', desc: 'الواحد ب١٥ ج.م - ال٣ ألوان ب٤٠ ج.م', price: 15, img: GH + 'IMG_20260910_214051_529.jpg', badge: '🖊️ طقم', badgeClass: 'badge-new' },
+          { name: 'أقلام من بينتريست للكتابة على طول', desc: 'أقلام طالعه من بينتريست للكتابه على طول - الواحد ب٣٥ ج.م', price: 35, img: GH + 'IMG_20260910_210433_128.jpg', badge: '📌 بينتريست', badgeClass: 'badge-new' },
+          { name: 'قلم جاف أزرق 0.5 مم', desc: 'قلم جاف ازرق 0.5 m ب١٥ ج.م', price: 15, img: GH + 'IMG_20260910_214224_361.jpg', badge: '🖊️ 0.5 مم', badgeClass: 'badge-new' },
+          { name: 'أقلام جاف روتو', desc: 'أقلام جاف روتو عمليه مريحه في الكتابه بجميع الألوان - القلم ب٥ ج.م 💥', price: 5, img: GH + 'file_000000008bd8822f89704e4f93f78ad6.png', badge: '💥 روتو', badgeClass: 'badge-sale' }
         ]
       },
       highlighters: {
         title: 'Highlighters', icon: '🟡',
         products: [
-          { name: 'هايلايتر جميع الألوان', desc: 'هايلايتر جميع الألوان اللي نفسك فيها! 🌈 القلم بـ 20 ج.م والـ 6 أقلام بـ 100 ج.م بدل 120 ✨', price: 20, img: 'https://i.postimg.cc/t4Xgjgh1/5841321252923051912.jpg', badge: 'عرض خاص 🔥', badgeClass: 'badge-sale' },
-          { name: 'هايلايتر جميع الألوان - الواحد ب٢٠', desc: 'هايلايتر جميع الألوان - الواحد ب٢٠ ج.م', price: 20, img: 'https://i.postimg.cc/85m8rjwq/file-000000009c5081f4a6090f04468a2a6f.png', badge: '🌈 جميع الألوان', badgeClass: 'badge-new' }
+          { name: 'هايلايتر جميع الألوان', desc: 'هايلايتر جميع الألوان اللي نفسك فيها! 🌈 القلم بـ 20 ج.م والـ 6 أقلام بـ 100 ج.م بدل 120 ✨', price: 20, img: GH + '5841321252923051912.jpg', badge: 'عرض خاص 🔥', badgeClass: 'badge-sale' },
+          { name: 'هايلايتر جميع الألوان - الواحد ب٢٠', desc: 'هايلايتر جميع الألوان - الواحد ب٢٠ ج.م', price: 20, img: GH + 'file_000000009c5081f4a6090f04468a2a6f.png', badge: '🌈 جميع الألوان', badgeClass: 'badge-new' }
         ]
       }
     };
@@ -792,70 +744,6 @@
     }
 
     // =============================================
-    // ⭐ STAR RATING
-    // =============================================
-    const stars = document.querySelectorAll('.star-rating .star');
-    const ratingInput = document.getElementById('ratingValue');
-    let selectedRating = 0;
-    stars.forEach(star => {
-      star.addEventListener('click', function() {
-        selectedRating = parseInt(this.dataset.value);
-        ratingInput.value = selectedRating;
-        stars.forEach(s => s.classList.toggle('active', parseInt(s.dataset.value) <= selectedRating));
-      });
-    });
-
-    // =============================================
-    // 💬 ADD REVIEW
-    // =============================================
-    function addReview(e) {
-      e.preventDefault();
-      const name = document.getElementById('reviewName').value.trim();
-      const text = document.getElementById('reviewText').value.trim();
-      if (!name) { alert('من فضلك اكتب اسمك 😊'); return; }
-      if (!text) { alert('من فضلك اكتب رأيك 💕'); return; }
-      if (selectedRating === 0) { alert('من فضلك اختار تقييم بالنجوم ⭐'); return; }
-
-      const now = new Date();
-      const dateStr = now.toLocaleDateString('ar-EG', { year: 'numeric', month: 'long', day: 'numeric' }) + ' - ' +
-        now.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
-
-      database.ref('reviews').push({ name, rating: selectedRating, text, date: dateStr, timestamp: Date.now() })
-        .then(() => {
-          document.getElementById('reviewForm').reset();
-          selectedRating = 0;
-          ratingInput.value = 0;
-          stars.forEach(s => s.classList.remove('active'));
-          alert('✅ تم إضافة رأيك! شكراً لمشاركتنا 🌸');
-          loadReviews();
-        })
-        .catch(error => { alert('❌ حدث خطأ.'); console.error(error); });
-    }
-
-    // =============================================
-    // 📖 LOAD REVIEWS
-    // =============================================
-    function loadReviews() {
-      const container = document.getElementById('reviewsDisplay');
-      container.innerHTML = '<div class="loading-reviews">⏳ جاري تحميل الآراء...</div>';
-      database.ref('reviews').orderByChild('timestamp').once('value')
-        .then(snapshot => {
-          const reviews = [];
-          snapshot.forEach(child => reviews.push(child.val()));
-          reviews.reverse();
-          if (reviews.length === 0) {
-            container.innerHTML = `<div class="no-reviews"><span class="icon">💭</span><p>لا توجد آراء بعد... كن أول من يشاركنا رأيه! 🌸</p></div>`;
-            return;
-          }
-          container.innerHTML = reviews.map(r => {
-            const starsStr = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
-            return `<div class="review-item"><div class="review-header"><span class="review-name">${r.name}</span><span class="review-stars">${starsStr}</span></div><div class="review-text">${r.text}</div><div class="review-date">${r.date}</div></div>`;
-          }).join('');
-        })
-        .catch(error => { container.innerHTML = `<div class="no-reviews"><span class="icon">⚠️</span><p>حدث خطأ في تحميل الآراء</p></div>`; });
-    }
-
-    // =============================================
     // 📱 MENU TOGGLE
     // =============================================
     function toggleMenu() {
@@ -886,7 +774,6 @@
     // =============================================
     document.addEventListener('DOMContentLoaded', () => {
       buildCategoriesGrid();
-      loadReviews();
       updateVisitorCount();
     });
   </script>
