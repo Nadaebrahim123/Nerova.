@@ -96,7 +96,7 @@
     .category-card .count { font-size:clamp(0.6rem,0.8vw,0.75rem); color:rgba(43,43,51,0.45); font-weight:600; }
     .category-card .count span { background:rgba(232,127,168,0.08); padding:1px 10px; border-radius:20px; color:var(--primary-dark); font-weight:700; }
 
-    /* ===== PRODUCTS (صور كبيرة وواضحة) ===== */
+    /* ===== PRODUCTS (صور كبيرة) ===== */
     .products-display { display:none; animation:fadeInUp 0.5s ease; }
     .products-display.active { display:block; }
     @keyframes fadeInUp { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:translateY(0);} }
@@ -104,47 +104,14 @@
     .category-products .back-link:hover { gap:14px; background:rgba(232,127,168,0.12); }
     .category-products .cat-title { font-family:'Playfair Display',serif; font-size:clamp(1.4rem,2.5vw,1.8rem); font-weight:700; margin-bottom:clamp(14px,2vw,20px); }
 
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(clamp(220px, 28vw, 320px), 1fr));
-      gap: clamp(18px, 2.5vw, 28px);
-    }
-
-    .product-card {
-      background: rgba(255,255,255,0.7);
-      backdrop-filter: blur(8px);
-      border-radius: clamp(16px, 1.8vw, 20px);
-      padding: clamp(16px, 1.8vw, 22px) clamp(14px, 1.5vw, 18px);
-      box-shadow: 0 6px 20px rgba(43,43,51,0.05);
-      transition: var(--transition);
-      border: 1px solid rgba(255,255,255,0.25);
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-    }
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(clamp(220px, 28vw, 320px), 1fr)); gap: clamp(18px, 2.5vw, 28px); }
+    .product-card { background: rgba(255,255,255,0.7); backdrop-filter: blur(8px); border-radius: clamp(16px, 1.8vw, 20px); padding: clamp(16px, 1.8vw, 22px) clamp(14px, 1.5vw, 18px); box-shadow: 0 6px 20px rgba(43,43,51,0.05); transition: var(--transition); border: 1px solid rgba(255,255,255,0.25); text-align: center; display: flex; flex-direction: column; }
     .product-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(43,43,51,0.10); background: rgba(255,255,255,0.9); }
-
     .product-img-wrapper { position:relative; cursor:pointer; overflow:hidden; border-radius:14px; margin-bottom:12px; }
-
-    /* ✅ صورة كبيرة وواضحة */
-    .product-img-wrapper .product-img {
-      width: 100%;
-      height: clamp(220px, 28vw, 320px);
-      object-fit: cover;
-      transition: var(--transition);
-      background: linear-gradient(135deg, #F7C5D9, #E87FA8);
-    }
+    .product-img-wrapper .product-img { width: 100%; height: clamp(220px, 28vw, 320px); object-fit: cover; transition: var(--transition); background: linear-gradient(135deg, #F7C5D9, #E87FA8); }
     .product-img-wrapper:hover .product-img { transform: scale(1.05); }
-
-    .product-img-wrapper .zoom-icon {
-      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
-      font-size: 2rem; color: white; background: rgba(0,0,0,0.55);
-      backdrop-filter: blur(5px); width: 60px; height: 60px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      opacity: 0; transition: var(--transition); pointer-events: none;
-    }
+    .product-img-wrapper .zoom-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: 2rem; color: white; background: rgba(0,0,0,0.55); backdrop-filter: blur(5px); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; opacity: 0; transition: var(--transition); pointer-events: none; }
     .product-img-wrapper:hover .zoom-icon { opacity: 1; }
-
     .product-card .product-icon { font-size: clamp(2rem,3vw,2.8rem); margin-bottom:8px; display:block; }
     .product-card h3 { font-size: clamp(1rem,1.4vw,1.2rem); font-weight:700; margin-bottom:5px; }
     .product-card p { font-size: clamp(0.8rem,1vw,0.9rem); color:rgba(43,43,51,0.6); line-height:1.6; margin-bottom:10px; flex:1; }
@@ -396,7 +363,7 @@
       storageBucket: "nerova-9960b.firebasestorage.app",
       messagingSenderId: "663051436632",
       appId: "1:663051436632:web:cc44dd3e7a8bbc96d1002d",
-      measurementKind: "G-G1QEKBC3LV"
+      measurementId: "G-G1QEKBC3LV"
     };
 
     firebase.initializeApp(firebaseConfig);
@@ -456,7 +423,7 @@
         products: [
           { name: 'أقلام جاف أزرق', desc: 'أقلام جاف ازرق جميع الأشكال - القلم ب٣٠ ج.م', price: 30, img: 'https://i.ibb.co/bgvdMzPh/file-00000000872081f9b44746c2241e952d.png', badge: '🖊️ جديد', badgeClass: 'badge-new' },
           { name: 'أقلام جاف من بينتريست', desc: 'أقلام جاف طالعه من بينتريست - الواحد ب٤٠ ج.م', price: 40, img: 'https://i.ibb.co/2YFmFKNW/file-0000000015988246ac9b827bbe49b727.png', badge: '📌 بينتريست', badgeClass: 'badge-new' },
-          { name: 'قلم روتو', desc: 'القلم الroto بكل ألوانه - ب١٥ ج.م', price: 15, img: 'https://i.ibb.co/vC883YqG/file-00000000c1008230b5c4091a90ecf9f3.png', badge: '🖊️ روتو', badgeClass: 'badge-new' },
+          { name: 'قلم روتو', desc: 'القلم الroto بكل ألوانه - ب١٥ ج.م', price: 15, img: 'https://look.jmgbb.com/images/7lLRXbBd5w.png', badge: '🖊️ روتو', badgeClass: 'badge-new' },
           { name: 'طقم أقلام جاف', desc: 'الواحد ب١٥ ج.م - ال٣ ألوان ب٤٠ ج.م', price: 15, img: 'https://i.ibb.co/XfNJVKK7/IMG-20260910-214224-211.jpg', badge: '🖊️ طقم', badgeClass: 'badge-new' },
           { name: 'أقلام من بينتريست للكتابة على طول', desc: 'أقلام طالعه من بينتريست للكتابه على طول - الواحد ب٣٥ ج.م', price: 35, img: 'https://i.ibb.co/BV6nRJ2z/5841321252923052240-120.jpg', badge: '📌 بينتريست', badgeClass: 'badge-new' },
           { name: 'قلم جاف أزرق 0.5 مم', desc: 'قلم جاف ازرق 0.5 m ب١٥ ج.م', price: 15, img: 'https://i.ibb.co/LdnQSydh/IMG-20260910-214224-361.jpg', badge: '🖊️ 0.5 مم', badgeClass: 'badge-new' },
@@ -787,4 +754,4 @@
   </script>
 
 </body>
-      </html>
+  </html>
