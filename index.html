@@ -8,7 +8,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Great+Vibes&family=Kalam:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <!-- ===== FIREBASE SDK ===== -->
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 
@@ -56,18 +55,9 @@
     .hamburger { display: none; font-size: clamp(1.3rem, 3vw, 1.6rem); cursor: pointer; padding: 5px 8px; border-radius: 8px; background: rgba(232,127,168,0.05); }
 
     /* ===== HERO ===== */
-    .hero {
-      min-height: 100vh; display: flex; align-items: center; justify-content: center;
-      text-align: center; padding: clamp(40px, 6%, 80px) 5%; position: relative; overflow: hidden;
-    }
+    .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: clamp(40px, 6%, 80px) 5%; position: relative; overflow: hidden; }
     .hero-content { position: relative; z-index: 2; max-width: 750px; margin: 0 auto; }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: rgba(255,255,255,0.4); backdrop-filter: blur(10px);
-      padding: 6px 20px; border-radius: 30px; font-weight: 700;
-      font-size: clamp(0.7rem, 1vw, 0.85rem); margin-bottom: 20px;
-      border: 1px solid rgba(255,255,255,0.3);
-    }
+    .hero-badge { display: inline-flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.4); backdrop-filter: blur(10px); padding: 6px 20px; border-radius: 30px; font-weight: 700; font-size: clamp(0.7rem, 1vw, 0.85rem); margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.3); }
     .hero-badge .dot { width:7px; height:7px; border-radius:50%; background:var(--accent); animation:pulseDot 2s ease-in-out infinite; }
     @keyframes pulseDot { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.5;transform:scale(0.8);} }
     .hero-title { font-family:'Playfair Display',serif; font-size:clamp(2.5rem,6vw,4.2rem); line-height:1.1; font-weight:700; margin-bottom:15px; }
@@ -90,7 +80,7 @@
 
     /* ===== CATEGORY GRID ===== */
     .categories-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(clamp(130px,17vw,200px),1fr)); gap:clamp(14px,2vw,24px); margin-bottom:clamp(20px,3vw,40px); }
-    .category-card { background:rgba(255,255,255,0.5); backdrop-filter:blur(12px); border-radius:clamp(18px,2.5vw,24px); padding:clamp(18px,2.5vw,28px) clamp(12px,1.5vw,20px); text-align:center; border:1px solid rgba(255,255,255,0.25); box-shadow:0 8px 32px rgba(43,43,51,0.04); cursor:pointer; transition:var(--transition); position:relative; overflow:hidden; display:flex; flex-direction:column; align-items:center; gap:6px; -webkit-tap-highlight-color:transparent; }
+    .category-card { background:rgba(255,255,255,0.5); backdrop-filter:blur(12px); border-radius:clamp(18px,2.5vw,24px); padding:clamp(18px,2.5vw,28px) clamp(12px,1.5vw,20px); text-align:center; border:1px solid rgba(255,255,255,0.25); box-shadow:0 8px 32px rgba(43,43,51,0.04); cursor:pointer; transition:var(--transition); display:flex; flex-direction:column; align-items:center; gap:6px; }
     .category-card:hover { transform:translateY(-8px); box-shadow:0 20px 50px rgba(43,43,51,0.10); background:rgba(255,255,255,0.8); }
     .category-card .icon-wrapper { width:clamp(64px,8vw,84px); height:clamp(64px,8vw,84px); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:clamp(2.2rem,4vw,3.2rem); margin-bottom:4px; box-shadow:0 4px 20px rgba(43,43,51,0.06); }
     .category-card:nth-child(1) .icon-wrapper { background:linear-gradient(135deg,#f7d4e0,#E87FA8); color:#B85A7A; }
@@ -114,7 +104,7 @@
     .category-products .back-link:hover { gap:14px; background:rgba(232,127,168,0.12); }
     .category-products .cat-title { font-family:'Playfair Display',serif; font-size:clamp(1.4rem,2.5vw,1.8rem); font-weight:700; margin-bottom:clamp(14px,2vw,20px); }
     .products-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(clamp(150px,20vw,240px),1fr)); gap:clamp(14px,2vw,20px); }
-    .product-card { background:rgba(255,255,255,0.6); backdrop-filter:blur(8px); border-radius:clamp(14px,1.5vw,16px); padding:clamp(14px,1.5vw,20px) clamp(12px,1.2vw,16px); box-shadow:0 4px 16px rgba(43,43,51,0.04); transition:var(--transition); border:1px solid rgba(255,255,255,0.2); text-align:center; display:flex; flex-direction:column; position:relative; }
+    .product-card { background:rgba(255,255,255,0.6); backdrop-filter:blur(8px); border-radius:clamp(14px,1.5vw,16px); padding:clamp(14px,1.5vw,20px) clamp(12px,1.2vw,16px); box-shadow:0 4px 16px rgba(43,43,51,0.04); transition:var(--transition); border:1px solid rgba(255,255,255,0.2); text-align:center; display:flex; flex-direction:column; }
     .product-card:hover { transform:translateY(-4px); box-shadow:0 12px 32px rgba(43,43,51,0.08); background:rgba(255,255,255,0.8); }
     .product-img-wrapper { position:relative; cursor:pointer; overflow:hidden; border-radius:12px; margin-bottom:10px; }
     .product-img-wrapper .product-img { width:100%; height:clamp(130px,20vw,180px); object-fit:cover; transition:var(--transition); }
@@ -165,6 +155,10 @@
     .cart-actions .checkout-btn { background:var(--primary); color:var(--white); }
     .cart-actions .checkout-btn:hover { background:var(--primary-dark); }
     .cart-actions .close-cart-btn { background:rgba(43,43,51,0.06); color:var(--dark); }
+    .customer-form input { width:100%; padding:10px; border:1px solid rgba(43,43,51,0.1); border-radius:10px; font-family:'Cairo',sans-serif; font-size:0.9rem; outline:none; }
+    .customer-form input:focus { border-color:var(--primary); box-shadow:0 0 0 3px rgba(232,127,168,0.08); }
+    .customer-form .confirm-btn { width:100%; padding:14px; background:var(--primary); color:#fff; border:none; border-radius:12px; font-weight:700; font-size:1rem; font-family:'Cairo',sans-serif; cursor:pointer; margin-top:6px; }
+    .customer-form .confirm-btn:hover { background:var(--primary-dark); }
 
     /* ===== LIGHTBOX ===== */
     .lightbox-overlay { position:fixed; inset:0; z-index:10001; background:rgba(0,0,0,0.85); backdrop-filter:blur(10px); display:none; align-items:center; justify-content:center; padding:30px; cursor:pointer; }
@@ -220,7 +214,6 @@
     .social-links { display:flex; justify-content:center; gap:clamp(8px,1.2vw,15px); flex-wrap:wrap; }
     .social-links a { display:inline-flex; align-items:center; gap:8px; padding:clamp(10px,1.2vw,12px) clamp(16px,2vw,25px); border-radius:30px; font-weight:700; font-size:clamp(0.75rem,0.9vw,0.9rem); border:1px solid rgba(43,43,51,0.06); background:rgba(255,255,255,0.5); }
     .social-links a:hover { transform:translateY(-3px); }
-    .social-links .messenger { background:#0084FF; color:var(--white); border:none; }
     .social-links .whatsapp { background:#25D366; color:var(--white); border:none; }
     .social-links .facebook { background:#1877F2; color:var(--white); border:none; }
     .social-links .instagram { background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); color:var(--white); border:none; }
@@ -325,9 +318,23 @@
           <div class="amount" id="cartTotalAmount">0 ج.م</div>
         </div>
       </div>
+
+      <!-- ✅ فورم مبسّط: الاسم + ملاحظات فقط -->
+      <div id="customerInfo" class="customer-form" style="display:none;margin-top:14px;">
+        <div style="text-align:right;margin-bottom:10px;">
+          <label style="font-weight:700;font-size:0.9rem;display:block;margin-bottom:4px;">👤 الاسم</label>
+          <input type="text" id="custName" placeholder="اسمك">
+        </div>
+        <div style="text-align:right;margin-bottom:10px;">
+          <label style="font-weight:700;font-size:0.9rem;display:block;margin-bottom:4px;">📝 ملاحظات (اختياري)</label>
+          <input type="text" id="custNotes" placeholder="أي تفاصيل إضافية">
+        </div>
+        <button class="confirm-btn" onclick="submitOrder()">✅ تأكيد الطلب</button>
+      </div>
+
       <div class="cart-actions" id="cartActions" style="display:none;">
         <button class="close-cart-btn" onclick="closeCart()">استمر في التسوق</button>
-        <button class="checkout-btn" onclick="checkout()">اطلب الآن ✨</button>
+        <button class="checkout-btn" onclick="showCustomerForm()">اطلب الآن ✨</button>
       </div>
     </div>
   </div>
@@ -380,10 +387,15 @@
       <h2>Let's Stay Connected</h2>
       <p>Thank you for visiting 𝒩𝑒𝓇𝑜𝓋𝒶 ♡. We can't wait to be part of your next idea.</p>
       <div class="social-links">
-        <a href="https://m.me/NerovaStationery" class="messenger"><i class="fab fa-facebook-messenger"></i> <span>Messenger</span></a>
-        <a href="https://chat.whatsapp.com/Gdnfc5x3JYJHm4hoKU1CoA" class="whatsapp"><i class="fab fa-whatsapp"></i> <span>WhatsApp</span></a>
-        <a href="https://www.facebook.com/share/1DujamZxFt/" class="facebook"><i class="fab fa-facebook"></i> <span>Facebook</span></a>
-        <a href="https://www.instagram.com/shop.nerova" class="instagram"><i class="fab fa-instagram"></i> <span>Instagram</span></a>
+        <a href="https://wa.me/201210933566" class="whatsapp" target="_blank">
+          <i class="fab fa-whatsapp"></i> <span>WhatsApp</span>
+        </a>
+        <a href="https://www.facebook.com/share/1DujamZxFt/" class="facebook" target="_blank">
+          <i class="fab fa-facebook"></i> <span>Facebook</span>
+        </a>
+        <a href="https://www.instagram.com/shop.nerova" class="instagram" target="_blank">
+          <i class="fab fa-instagram"></i> <span>Instagram</span>
+        </a>
       </div>
     </div>
   </section>
@@ -501,7 +513,6 @@
     // =============================================
     let cart = [];
 
-    // ✅ FIX: تمرير event للـ showAddFeedback
     function addToCart(name, price, img, icon, evt) {
       const existing = cart.find(item => item.name === name);
       if (existing) existing.qty += 1;
@@ -539,6 +550,7 @@
         container.innerHTML = `<div class="cart-empty"><span class="icon">🛍️</span><p>السلة فاضية</p><p style="font-size:0.8rem;margin-top:4px;color:rgba(43,43,51,0.3);">اختار منتجاتك المفضلة</p></div>`;
         totalSection.style.display = 'none';
         actions.style.display = 'none';
+        document.getElementById('customerInfo').style.display = 'none';
         return;
       }
 
@@ -596,55 +608,73 @@
     }
 
     // =============================================
-    // 📦 CHECKOUT - Facebook Messenger (مُصلح)
+    // 📦 CHECKOUT - واتساب (مبسّط: اسم + ملاحظات)
     // =============================================
-    const FACEBOOK_PAGE_ID = "NerovaStationery";
+    const WHATSAPP_NUMBER = "201210933566"; // 01210933566 بصيغة دولية
 
-    function checkout() {
+    function showCustomerForm() {
       if (cart.length === 0) {
         alert('السلة فاضية! أضف منتجات أولاً 🛍️');
         return;
       }
+      document.getElementById('cartActions').style.display = 'none';
+      document.getElementById('customerInfo').style.display = 'block';
+    }
 
-      // بناء رسالة الطلب
-      let msg = `📦 طلب جديد!\n\n`;
+    function submitOrder() {
+      const name = document.getElementById('custName').value.trim();
+      const notes = document.getElementById('custNotes').value.trim();
+
+      if (!name) { alert('من فضلك اكتب اسمك 😊'); return; }
+
       let total = 0;
       const items = cart.map(item => {
         const itemTotal = item.price * item.qty;
         total += itemTotal;
-        msg += `• ${item.name} × ${item.qty} = ${itemTotal} ج.م\n`;
-        return { name: item.name, price: item.price, qty: item.qty };
+        return { name: item.name, price: item.price, qty: item.qty, total: itemTotal };
       });
-      msg += `\n💰 السعر الكلي: ${total} ج.م`;
-      msg += `\n\n🌹 شكراً لثقتك في 𝒩𝑒𝓇𝑜𝓋𝒶 ♡`;
 
-      // 1) سجّل الأوردر في Firebase كنسخة احتياطية
-      database.ref('orders').push({
+      const order = {
+        customer: { name, notes },
         items: items,
         total: total,
         date: new Date().toISOString(),
+        dateAr: new Date().toLocaleString('ar-EG'),
         status: 'new'
-      }).catch(err => console.error('Order save error:', err));
+      };
 
-      // 2) افتح الميسنجر
-      const fbUrl = `https://m.me/${FACEBOOK_PAGE_ID}?text=${encodeURIComponent(msg)}`;
-      const win = window.open(fbUrl, '_blank');
+      const btn = event.target;
+      btn.disabled = true;
+      btn.innerHTML = '⏳ جاري التحويل...';
 
-      // لو المتصفح بلوك الـ popup، افتح في نفس الصفحة
-      if (!win || win.closed || typeof win.closed === 'undefined') {
-        window.location.href = fbUrl;
-      }
+      // احفظ الأوردر في Firebase كنسخة احتياطية
+      database.ref('orders').push(order).catch(err => console.error('Order save error:', err));
 
-      // 3) اسأل العميل يأكد قبل ما نفضّي السلة
+      // جهّز رسالة واتساب
+      let msg = `📦 طلب جديد من 𝒩𝑒𝓇𝑜𝓋𝒶 ♡\n\n`;
+      msg += `👤 الاسم: ${name}\n`;
+      if (notes) msg += `📝 ملاحظات: ${notes}\n`;
+      msg += `\n🛒 المنتجات:\n`;
+      items.forEach(i => { msg += `• ${i.name} × ${i.qty} = ${i.total} ج.م\n`; });
+      msg += `\n💰 السعر الكلي: ${total} ج.م`;
+      msg += `\n\n🌹 شكراً لثقتك في 𝒩𝑒𝓇𝑜𝓋𝒶 ♡`;
+
+      // افتح واتساب
+      const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+      window.open(waUrl, '_blank');
+
+      // فضّي السلة واقفل بعد لحظة
       setTimeout(() => {
-        const sent = confirm('هل بعت الطلب في الميسنجر؟\nلو أيوه هنفضّي السلة ونأكد الأوردر ✅');
-        if (sent) {
-          cart = [];
-          updateCartUI();
-          closeCart();
-          document.getElementById('successModal').classList.add('active');
-        }
-      }, 800);
+        cart = [];
+        updateCartUI();
+        document.getElementById('customerInfo').style.display = 'none';
+        document.getElementById('cartActions').style.display = 'flex';
+        document.getElementById('custName').value = '';
+        document.getElementById('custNotes').value = '';
+        btn.disabled = false;
+        btn.innerHTML = '✅ تأكيد الطلب';
+        closeCart();
+      }, 500);
     }
 
     // =============================================
@@ -661,12 +691,10 @@
     // =============================================
     function updateVisitorCount() {
       const visitorRef = database.ref('visitors');
-      visitorRef.once('value')
-        .then(snapshot => {
-          let count = (snapshot.val() || 0) + 1;
-          return visitorRef.set(count);
-        })
-        .catch(error => console.error('Visitor error:', error));
+      visitorRef.once('value').then(snapshot => {
+        let count = (snapshot.val() || 0) + 1;
+        return visitorRef.set(count);
+      }).catch(err => console.error('Visitor error:', err));
     }
 
     // =============================================
@@ -711,7 +739,6 @@
         return;
       }
 
-      // ✅ FIX: نضيف event للزرار
       let productsHTML = data.products.map(p => `
         <div class="product-card">
           ${p.badge ? `<span class="badge ${p.badgeClass}">${p.badge}</span>` : ''}
